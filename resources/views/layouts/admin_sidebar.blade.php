@@ -312,14 +312,20 @@
           </li>
            <li class="nav-item ">
             <a class="nav-link text-white " href="{{ route('admin.CloseTwoD') }}">
-              <span class="sidenav-mini-icon"> V </span>
+              <span class="sidenav-mini-icon"> C </span>
               <span class="sidenav-normal  ms-2  ps-1"> CloseTwoD </span>
             </a>
           </li>
           <li class="nav-item ">
             <a class="nav-link text-white " href="{{ route('admin.SessionResetIndex') }}">
-              <span class="sidenav-mini-icon"> V </span>
+              <span class="sidenav-mini-icon"> S </span>
               <span class="sidenav-normal  ms-2  ps-1"> SessionReset</span>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link text-white " href="{{ route('admin.two-d-play-noti') }}">
+              <span class="sidenav-mini-icon"> N </span>
+              <span class="sidenav-normal  ms-2  ps-1"> Notifications</span>
             </a>
           </li>
         </ul>
