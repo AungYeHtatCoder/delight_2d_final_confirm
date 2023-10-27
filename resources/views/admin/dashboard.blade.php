@@ -175,19 +175,19 @@
                 <div class="col-5 my-auto">
                   <span class="badge badge-md badge-dot me-4 d-block text-start">
                     <i class="bg-info"></i>
-                    <span class="text-dark text-xs">Facebook</span>
+                    <span class="text-dark text-xs">DailyIncome</span>
                   </span>
                   <span class="badge badge-md badge-dot me-4 d-block text-start">
                     <i class="bg-primary"></i>
-                    <span class="text-dark text-xs">Direct</span>
+                    <span class="text-dark text-xs">WeeklyIncome</span>
                   </span>
                   <span class="badge badge-md badge-dot me-4 d-block text-start">
                     <i class="bg-dark"></i>
-                    <span class="text-dark text-xs">Organic</span>
+                    <span class="text-dark text-xs">MonthlyIncome</span>
                   </span>
                   <span class="badge badge-md badge-dot me-4 d-block text-start">
                     <i class="bg-secondary"></i>
-                    <span class="text-dark text-xs">Referral</span>
+                    <span class="text-dark text-xs">YEarlyIncome</span>
                   </span>
                 </div>
               </div>
@@ -256,7 +256,7 @@
                   </div>
                 </div>
                 <div class="card-body">
-                  <h6 class="mb-0 ">Website Views</h6>
+                  <h6 class="mb-0 ">DailyIncome</h6>
                   <p class="text-sm ">Last Campaign Performance</p>
                   <hr class="dark horizontal">
                   <div class="d-flex ">
@@ -272,6 +272,8 @@
           {{-- fourth row end --}}
 @endsection
 @section('scripts')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script src="{{ asset('admin_app/assets/js/plugins/chartjs.min.js')}}"></script>
 {{-- pie chart --}}
 <script>
@@ -279,188 +281,218 @@
     var ctx2 = document.getElementById("chart-pie").getContext("2d");
     //var ctx3 = document.getElementById("chart-bar").getContext("2d");
 
-    // Line chart
-    new Chart(ctx1, {
-      type: "line",
-      data: {
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        datasets: [{
-            label: "Facebook Ads",
-            tension: 0,
-            pointRadius: 5,
-            pointBackgroundColor: "#e91e63",
-            pointBorderColor: "transparent",
-            borderColor: "#e91e63",
-            borderWidth: 4,
-            backgroundColor: "transparent",
-            fill: true,
-            data: [50, 100, 200, 190, 400, 350, 500, 450, 700],
-            maxBarThickness: 6
-          },
-          {
-            label: "Google Ads",
-            tension: 0,
-            borderWidth: 0,
-            pointRadius: 5,
-            pointBackgroundColor: "#3A416F",
-            pointBorderColor: "transparent",
-            borderColor: "#3A416F",
-            borderWidth: 4,
-            backgroundColor: "transparent",
-            fill: true,
-            data: [10, 30, 40, 120, 150, 220, 280, 250, 280],
-            maxBarThickness: 6
-          }
-        ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false,
-          }
-        },
-        interaction: {
-          intersect: false,
-          mode: 'index',
-        },
-        scales: {
-          y: {
-            grid: {
-              drawBorder: false,
-              display: true,
-              drawOnChartArea: true,
-              drawTicks: false,
-              borderDash: [5, 5],
-              color: '#c1c4ce5c'
-            },
-            ticks: {
-              display: true,
-              padding: 10,
-              color: '#9ca2b7',
-              font: {
-                size: 14,
-                weight: 300,
-                family: "Roboto",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-          x: {
-            grid: {
-              drawBorder: false,
-              display: true,
-              drawOnChartArea: true,
-              drawTicks: true,
-              borderDash: [5, 5],
-              color: '#c1c4ce5c'
-            },
-            ticks: {
-              display: true,
-              color: '#9ca2b7',
-              padding: 10,
-              font: {
-                size: 14,
-                weight: 300,
-                family: "Roboto",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-        },
-      },
-    });
+    // Fetch monthly totals
+async function fetchMonthlyTotals() {
+    const response = await fetch('/admin/month-with-name-income-json');
+    const data = await response.json();
+    return data.monthlyTotals;
+}
 
+// Render monthly chart
+async function renderMonthlyChart() {
+    const monthlyTotalsData = await fetchMonthlyTotals();
+
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    let labels = monthNames;
+    let amounts = []; 
+
+    // Fill data for all months of the year
+    for(let month of monthNames) {
+        amounts.push(monthlyTotalsData[month] || 0);
+    }
+
+    var ctx1 = document.getElementById("chart-line").getContext("2d");
+
+    new Chart(ctx1, {
+        type: "line",
+        data: {
+            labels: labels,
+            datasets: [{
+                label: "Monthly Totals",
+                tension: 0,
+                pointRadius: 5,
+                pointBackgroundColor: "#e91e63",
+                pointBorderColor: "transparent",
+                borderColor: "#e91e63",
+                borderWidth: 4,
+                backgroundColor: "transparent",
+                fill: true,
+                data: amounts,
+                maxBarThickness: 6
+            }],
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false,
+                }
+            },
+            interaction: {
+                intersect: false,
+                mode: 'index',
+            },
+            scales: {
+                y: {
+                    grid: {
+                        drawBorder: false,
+                        display: true,
+                        drawOnChartArea: true,
+                        drawTicks: false,
+                        borderDash: [5, 5],
+                        color: '#c1c4ce5c'
+                    },
+                    ticks: {
+                        display: true,
+                        padding: 10,
+                        color: '#9ca2b7',
+                        font: {
+                            size: 14,
+                            weight: 300,
+                            family: "Roboto",
+                            style: 'normal',
+                            lineHeight: 2
+                        },
+                    }
+                },
+                x: {
+                    grid: {
+                        drawBorder: false,
+                        display: true,
+                        drawOnChartArea: true,
+                        drawTicks: true,
+                        borderDash: [5, 5],
+                        color: '#c1c4ce5c'
+                    },
+                    ticks: {
+                        display: true,
+                        color: '#9ca2b7',
+                        padding: 10,
+                        font: {
+                            size: 14,
+                            weight: 300,
+                            family: "Roboto",
+                            style: 'normal',
+                            lineHeight: 2
+                        },
+                    }
+                },
+            },
+        }
+    });
+}
+
+// Call the render function when the page loads
+renderMonthlyChart();
 
     // Pie chart
-    new Chart(ctx2, {
-      type: "pie",
-      data: {
-        labels: ['DailyIncome', 'WeeklyIncome', 'MonthlyIncome', 'YEarlyIncome'],
-        datasets: [{
-          label: "Projects",
-          weight: 9,
-          cutout: 0,
-          tension: 0.9,
-          pointRadius: 2,
-          borderWidth: 1,
-          backgroundColor: ['#17c1e8', '#e91e63', '#3A416F', '#a8b8d8'],
-          data: [15, 20, 12, 60],
-          fill: false
-        }],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false,
-          }
-        },
-        interaction: {
-          intersect: false,
-          mode: 'index',
-        },
-        scales: {
-          y: {
-            grid: {
-              drawBorder: false,
-              display: false,
-              drawOnChartArea: false,
-              drawTicks: false,
-              color: '#c1c4ce5c'
+    $(document).ready(function() {
+    // Make an AJAX call to get the data
+    $.get('/admin/daily-income-json', function(response) {
+        // The JSON data: response
+        var dailyTotal = response.dailyTotal;
+        var weeklyTotal = response.weeklyTotal;
+        var monthlyTotal = response.monthlyTotal;
+        var yearlyTotal = response.yearlyTotal;
+
+        // Initiate the pie chart with fetched data
+        var ctx2 = document.getElementById("chart-pie").getContext("2d");
+
+        new Chart(ctx2, {
+            type: "pie",
+            data: {
+                labels: ['DailyIncome', 'WeeklyIncome', 'MonthlyIncome', 'YEarlyIncome'],
+                datasets: [{
+                    label: "Income",
+                    backgroundColor: ['#17c1e8', '#e91e63', '#3A416F', '#a8b8d8'],
+                    data: [dailyTotal, weeklyTotal, monthlyTotal, yearlyTotal]
+                }],
             },
-            ticks: {
-              display: false
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false,
+                    }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index',
+                },
+                scales: {
+                    y: {
+                        grid: {
+                            drawBorder: false,
+                            display: false,
+                            drawOnChartArea: false,
+                            drawTicks: false,
+                            color: '#c1c4ce5c'
+                        },
+                        ticks: {
+                            display: false
+                        }
+                    },
+                    x: {
+                        grid: {
+                            drawBorder: false,
+                            display: false,
+                            drawOnChartArea: false,
+                            drawTicks: false,
+                            color: '#c1c4ce5c'
+                        },
+                        ticks: {
+                            display: false,
+                        }
+                    },
+                },
             }
-          },
-          x: {
-            grid: {
-              drawBorder: false,
-              display: false,
-              drawOnChartArea: false,
-              drawTicks: false,
-              color: '#c1c4ce5c'
-            },
-            ticks: {
-              display: false,
-            }
-          },
-        },
-      },
+        });
     });
+});
 </script>
 {{-- pie chart end --}}
-{{-- bar chart --}}
-{{-- pie chart end --}}
-{{-- line chart --}}
 
-    {{-- line chart end --}}
-    {{-- line chart start --}}
-{{-- line chart end --}}
-{{-- first chart --}}
 <script>
+ async function fetchDailyTotals() {
+    const response = await fetch('/admin/daily-with-name-income-json');
+    const data = await response.json();
+    return data.dailyTotals;
+}
+
+async function renderChart() {
+    const dailyTotalsData = await fetchDailyTotals();
+
+    // Map numbers to day names
+    const dayNames = ["S", "M", "T", "W", "T", "F", "S"];
+    let labels = [];
+    let amounts = [];
+
+    // Fill data for entire week ensuring order from Sunday to Saturday
+    for(let i=1; i <= 7; i++) {
+        labels.push(dayNames[i-1]);
+        amounts.push(dailyTotalsData[i] || 0);  // If there's no data for a day, default to 0
+    }
+
     var ctx = document.getElementById("chart-bars").getContext("2d");
 
     new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels: ["M", "T", "W", "T", "F", "S", "S"],
-        datasets: [{
-          label: "Sales",
-          tension: 0.4,
-          borderWidth: 0,
-          borderRadius: 4,
-          borderSkipped: false,
-          backgroundColor: "rgba(255, 255, 255, .8)",
-          data: [50, 20, 10, 22, 50, 10, 40],
-          maxBarThickness: 6
-        }, ],
-      },
-      options: {
+        type: "bar",
+        data: {
+            labels: labels,
+            datasets: [{
+                label: "Sales",
+                tension: 0.4,
+                borderWidth: 0,
+                borderRadius: 4,
+                borderSkipped: false,
+                backgroundColor: "rgba(255, 255, 255, .8)",
+                data: amounts,
+                maxBarThickness: 6
+            }],
+        },
+        options: {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
@@ -522,9 +554,11 @@
         },
       },
     });
+   
+}
 
-
-    
+// Call the render function when the page loads
+renderChart();
 </script>
 {{-- first chart end --}}
 @endsection

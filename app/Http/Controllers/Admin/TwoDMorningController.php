@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Models\Admin\Lottery;
+use App\Models\Lottery;
 use App\Models\Admin\TwodWiner;
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -62,22 +62,6 @@ public function EveningTwoD()
     ]);
 }
 
-//     public function index()
-// {
-//     $lotteries = Lottery::with('twoDigitsMorning')->get();
-
-//     $prize_no_morning = TwodWiner::whereDate('created_at', Carbon::today())
-//                                  ->whereBetween('created_at', [Carbon::now()->startOfDay()->addHours(6), Carbon::now()->startOfDay()->addHours(12)])
-//                                  ->orderBy('id', 'desc')
-//                                  ->first();
-
-//     $prize_no_afternoon = TwodWiner::whereDate('created_at', Carbon::today())
-//                                    ->whereBetween('created_at', [Carbon::now()->startOfDay()->addHours(12), Carbon::now()->startOfDay()->addHours(18)])
-//                                    ->orderBy('id', 'desc')
-//                                    ->first();
-//     $prize_no = TwodWiner::whereDate('created_at', Carbon::today())->orderBy('id', 'desc')->first();
-//     return view('admin.two_d.two_d_morning.index', compact('lotteries', 'prize_no_morning', 'prize_no_afternoon', 'prize_no'));
-// }
 
 public function TwoDMorningWinner()
 {

@@ -6,8 +6,10 @@ use Log;
 use Illuminate\Http\Request;
 use App\Models\Admin\Lottery;
 use App\Models\Admin\TwoDigit;
+use App\Models\Admin\LotteryMatch;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\LotteryTwoDigitPivot;
 use Illuminate\Support\Facades\Auth;
 
 class TwoDPlayController extends Controller
@@ -19,6 +21,52 @@ class TwoDPlayController extends Controller
     'morning' => 5000, // Limit for morning session
     'evening' => 5000  // Limit for evening session
 ];
+
+    public function GetTwoDigit()
+    {
+        // get all two digits
+        //$twoDigits = TwoDigit::all();
+        return view('two_d.play_two_d_index');
+    }
+
+    public function MorningPlayTwoDigit()
+    {
+        $twoDigits = TwoDigit::all();
+
+    // Calculate remaining amounts for each two-digit
+    $remainingAmounts = [];
+    foreach ($twoDigits as $digit) {
+        $totalBetAmountForTwoDigit = DB::table('lottery_two_digit_copy')
+            ->where('two_digit_id', $digit->id)
+            ->sum('sub_amount');
+
+        $remainingAmounts[$digit->id] = 5000 - $totalBetAmountForTwoDigit; // Assuming 5000 is the session limit
+    }
+    $lottery_matches = LotteryMatch::where('id', 1)->whereNotNull('is_active')->first();
+
+    return view('two_d.morning_play', compact('twoDigits', 'remainingAmounts', 'lottery_matches'));
+        
+    }
+
+    public function EveningPlayTwoDigit()
+    {
+        $twoDigits = TwoDigit::all();
+
+    // Calculate remaining amounts for each two-digit
+    $remainingAmounts = [];
+    foreach ($twoDigits as $digit) {
+        $totalBetAmountForTwoDigit = DB::table('lottery_two_digit_copy')
+            ->where('two_digit_id', $digit->id)
+            ->sum('sub_amount');
+
+        $remainingAmounts[$digit->id] = 5000 - $totalBetAmountForTwoDigit; // Assuming 5000 is the session limit
+    }
+    $lottery_matches = LotteryMatch::where('id', 1)->whereNotNull('is_active')->first();
+
+    return view('two_d.evening_play', compact('twoDigits', 'remainingAmounts', 'lottery_matches'));
+        
+    }
+
 
     public function index()
     {
@@ -44,21 +92,18 @@ class TwoDPlayController extends Controller
         'user_id' => 'required|exists:users,id',
     ]);
 
-    $currentSession = date('H') < 12 ? 'morning' : 'evening';  // before 1 pm is morning
+    $currentSession = date('H') < 12 ? 'morning' : 'evening';
 
     DB::beginTransaction();
 
     try {
-        // Deduct the total amount from the user's balance
         $user = Auth::user();
         $user->balance -= $request->totalAmount;
 
-        // Check if user balance is negative after deduction
         if ($user->balance < 0) {
             throw new \Exception('Your balance is not enough.');
         }
 
-        // Update user balance in the database
         $user->save();
 
         $lottery = Lottery::create([
@@ -68,23 +113,25 @@ class TwoDPlayController extends Controller
             'session' => $currentSession
         ]);
 
-        $attachData = [];
-        foreach($request->amounts as $two_digit_id => $sub_amount) {
+        foreach ($request->amounts as $two_digit_id => $sub_amount) {
             $totalBetAmountForTwoDigit = DB::table('lottery_two_digit_pivot')
-                    ->join('lotteries', 'lotteries.id', '=', 'lottery_two_digit_pivot.lottery_id')
-                    ->where('two_digit_id', $two_digit_id)
-                    ->where('lotteries.session', $currentSession)
-                    ->sum('sub_amount');
+                ->join('lotteries', 'lotteries.id', '=', 'lottery_two_digit_pivot.lottery_id')
+                ->where('two_digit_id', $two_digit_id)
+                ->where('lotteries.session', $currentSession)
+                ->sum('sub_amount');
 
-            // Use session-specific limit for verification
-            if($totalBetAmountForTwoDigit + $sub_amount > $this->sessionLimits[$currentSession]) {
+            if ($totalBetAmountForTwoDigit + $sub_amount > 5000) {
                 $twoDigit = TwoDigit::find($two_digit_id);
-                throw new \Exception("The two-digit's amount limit for {$twoDigit->two_digit} in {$currentSession} session is full.");
+                throw new \Exception("The two-digit's amount limit for {$twoDigit->two_digit} is full.");
             }
-            $attachData[$two_digit_id] = ['sub_amount' => $sub_amount];
-        }
 
-        $lottery->twoDigits()->attach($attachData);
+            $pivot = new LotteryTwoDigitPivot();
+            $pivot->lottery_id = $lottery->id;
+            $pivot->two_digit_id = $two_digit_id;
+            $pivot->sub_amount = $sub_amount;
+            $pivot->prize_sent = false;
+            $pivot->save();
+        }
 
         DB::commit();
 

@@ -261,11 +261,19 @@
       <div class="collapse " id="applicationsExamples">
         <ul class="nav ">
           <li class="nav-item ">
+            <a class="nav-link text-white " href="{{ route('admin.two-d-users-index')}}">
+              <span class="sidenav-mini-icon"> 2D | U </span>
+              <span class="sidenav-normal  ms-2  ps-1"> 2D Users </span>
+            </a>
+          </li>
+          <li class="nav-item ">
             <a class="nav-link text-white " href="{{ route('admin.twod-records.index')}}">
               <span class="sidenav-mini-icon"> 2D | H </span>
               <span class="sidenav-normal  ms-2  ps-1"> 2D History </span>
             </a>
           </li>
+
+          
           <li class="nav-item ">
             <a class="nav-link text-white " href="{{ route('admin.tow-d-win-number.index') }}">
               <span class="sidenav-mini-icon"> K </span>

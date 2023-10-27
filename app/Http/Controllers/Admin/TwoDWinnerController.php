@@ -18,8 +18,8 @@ class TwoDWinnerController extends Controller
     public function index()
     {
         
-         $morningData = TwodWiner::where('session', 'morning')->first();
-        $eveningData = TwodWiner::where('session', 'evening')->first();
+        $morningData = TwodWiner::where('session', 'morning')->orderBy('id', 'desc')->first();
+        $eveningData = TwodWiner::where('session', 'evening')->orderBy('id', 'desc')->first();
 
         return view('admin.two_d.prize_index', compact('morningData', 'eveningData'));
     }
