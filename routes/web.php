@@ -41,6 +41,19 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
  Write here User Side no need Auth Routes
  */
 Route::get('/', [App\Http\Controllers\User\WelcomeController::class, 'index'])->name('welcome');
+Route::get('/wallet', [App\Http\Controllers\User\WelcomeController::class, 'wallet']);
+Route::get('/topUp', [App\Http\Controllers\User\WelcomeController::class, 'topUp']);
+Route::get('/withDraw', [App\Http\Controllers\User\WelcomeController::class, 'withDraw']);
+Route::get('/promo', [App\Http\Controllers\User\WelcomeController::class, 'promo']);
+Route::get('/promo/promo-detail', [App\Http\Controllers\User\WelcomeController::class, 'promoDetail']);
+Route::get('/service', [App\Http\Controllers\User\WelcomeController::class, 'servicePage']);
+Route::get('/dashboard', [App\Http\Controllers\User\WelcomeController::class, 'dashboard']);
+Route::get('/winnerDigit', [App\Http\Controllers\User\WelcomeController::class, 'winnerDigit']);
+Route::get('/myDigit', [App\Http\Controllers\User\WelcomeController::class, 'myDigit']);
+Route::get('/myBank', [App\Http\Controllers\User\WelcomeController::class, 'myBank']);
+Route::get('/changePassword', [App\Http\Controllers\User\WelcomeController::class, 'changePassword']);
+Route::get('/inviteCode', [App\Http\Controllers\User\WelcomeController::class, 'inviteCode']);
+Route::get('/comment', [App\Http\Controllers\User\WelcomeController::class, 'comment']);
 
 
 /* no need auth route end */
@@ -91,12 +104,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'App\Http\Co
     Route::get('/daily-income-json', [App\Http\Controllers\Admin\DailyTwodIncomeOutComeController::class, 'getTotalAmounts'])->name('dailyIncomeJson');
 });
 
-Route::get('/daily-income-json', [App\Http\Controllers\Admin\DailyTwodIncomeOutComeController::class, 'getTotalAmounts'])->name('dailyIncomeJson'); 
+Route::get('/daily-income-json', [App\Http\Controllers\Admin\DailyTwodIncomeOutComeController::class, 'getTotalAmounts'])->name('dailyIncomeJson');
 Route::group(['prefix' => 'user', 'as' => 'user.', 'namespace' => 'App\Http\Controllers\Admin', 'middleware' => ['auth']], function () {
-    
-    /* 
+
+    /*
     **********
-    Write here Client Side Auth Routes 
+    Write here Client Side Auth Routes
     **********
     */
 });
