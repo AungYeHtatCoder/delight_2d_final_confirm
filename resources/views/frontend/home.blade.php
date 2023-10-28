@@ -32,8 +32,8 @@
 <div class="my-3">
     <div class="d-flex justify-content-around">
         <div class="">
-            <div class="item-box"><h4><a href="twod.html">2D PLAY</a></h4></div>
-            <a href="twod.html" style="text-decoration: none;">
+            <div class="item-box"><h4><a href="{{ url('/twod') }}">2D PLAY</a></h4></div>
+            <a href="{{ url('/twod') }}" style="text-decoration: none;">
             <p class="item-text font-weight-bold">2D</p>
             </a>
         </div>

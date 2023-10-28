@@ -27,7 +27,10 @@
           <div class="col-lg-4 col-md-4 offset-lg-4 offset-md-4 bg-green">
             <div class="px-3 py-3">
               <div class="d-flex justify-content-between">
-                <div></div>
+                <div>
+
+                    <a href="{{ url('/') }}" class="text-decoration-none btn btn-sm text-white {{ request()->path() == "/twod" ? "d-none" : "" }}"><i class="fas fa-arrow-left"></i></a>
+                </div>
                 <h5 class="mx-auto">Delight 2D | 3D</h5>
                 <span class="material-icons" id="refresh">refresh</span>
               </div>

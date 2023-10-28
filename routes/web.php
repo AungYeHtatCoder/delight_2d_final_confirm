@@ -41,6 +41,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
  Write here User Side no need Auth Routes
  */
 Route::get('/', [App\Http\Controllers\User\WelcomeController::class, 'index'])->name('welcome');
+Route::get('/twod', [App\Http\Controllers\User\WelcomeController::class, 'twod']);
 Route::get('/wallet', [App\Http\Controllers\User\WelcomeController::class, 'wallet']);
 Route::get('/topUp', [App\Http\Controllers\User\WelcomeController::class, 'topUp']);
 Route::get('/withDraw', [App\Http\Controllers\User\WelcomeController::class, 'withDraw']);

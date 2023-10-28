@@ -118,6 +118,10 @@ class WelcomeController extends Controller
         return view('frontend.changePassword');
     }
 
+    public function twod(){
+        return view('frontend.twod');
+    }
+
 
     public function inviteCode(){
         return view('frontend.inviteCode');
