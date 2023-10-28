@@ -71,9 +71,65 @@ class WelcomeController extends Controller
             return response()->json($data);
         }
 
-        return view('welcome', compact('data', 'banners'));
+        return view('frontend.home', compact('data', 'banners'));
     }
 
+    public function wallet(){
+        return view('frontend.wallet');
+    }
+
+    public function topUp(){
+        return view('frontend.topUp');
+    }
+
+    public function withDraw(){
+        return view('frontend.withDraw');
+    }
+
+    public function promo(){
+        return view('frontend.promo');
+    }
+
+    public function promoDetail(){
+        return view('frontend.promoDetail');
+    }
+
+    public function servicePage(){
+        return view('frontend.service');
+    }
+
+    public function dashboard(){
+        return view('frontend.dashboard');
+    }
+
+    public function winnerDigit(){
+        return view('frontend.winnerDigit');
+    }
+
+    public function myDigit(){
+        return view('frontend.myDigit');
+    }
+
+    public function myBank(){
+        return view('frontend.myBank');
+    }
+
+    public function changePassword(){
+        return view('frontend.changePassword');
+    }
+
+    public function twod(){
+        return view('frontend.twod');
+    }
+
+
+    public function inviteCode(){
+        return view('frontend.inviteCode');
+    }
+
+    public function comment(){
+        return view('frontend.comment');
+    }
 
     /**
      * Show the form for creating a new resource.
