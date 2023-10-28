@@ -4,7 +4,9 @@
 @if(auth()->user()->is_admin)
     @forelse($notifications as $notification)
         <div class="alert alert-success" role="alert">
-            [{{ $notification->created_at }}] User {{ $notification->data['message'] }} ({{ $notification->data['user_id'] }}) has just registered.
+            User {{ $notification->data['message'] }} Account ID <strong style="color: aliceblue">
+            ({{ $notification->data['user_id'] }}) 
+            </strong> has just played two D [({{ $notification->created_at }})].
             <a href="#" class="float-right mark-as-read" data-id="{{ $notification->id }}">
                 Mark as read
             </a>
