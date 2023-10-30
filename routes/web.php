@@ -50,7 +50,6 @@ Route::get('/withDraw', [App\Http\Controllers\User\WelcomeController::class, 'wi
 Route::get('/promo', [App\Http\Controllers\User\WelcomeController::class, 'promo']);
 Route::get('/promo/promo-detail', [App\Http\Controllers\User\WelcomeController::class, 'promoDetail']);
 Route::get('/service', [App\Http\Controllers\User\WelcomeController::class, 'servicePage']);
-Route::get('/dashboard', [App\Http\Controllers\User\WelcomeController::class, 'dashboard']);
 Route::get('/winnerDigit', [App\Http\Controllers\User\WelcomeController::class, 'winnerDigit']);
 Route::get('/myDigit', [App\Http\Controllers\User\WelcomeController::class, 'myDigit']);
 Route::get('/myBank', [App\Http\Controllers\User\WelcomeController::class, 'myBank']);
@@ -141,6 +140,7 @@ Route::group(['prefix' => 'user', 'as' => 'user.', 'namespace' => 'App\Http\Cont
     Write here Client Side Auth Routes
     **********
     */
+Route::get('/dashboard', [App\Http\Controllers\User\WelcomeController::class, 'dashboard']);
 Route::get('/play-two-evening-record', [App\Http\Controllers\HomeController::class, 'UserPlayEveningRecord'])->name('UserPlayEveningRecord');
 Route::get('/morning-history-record', [App\Http\Controllers\User\PrizeNoController::class, 'MorningPrizeNo'])->name('MorningPrizeNo');
 Route::get('/evening-history-record', [App\Http\Controllers\User\PrizeNoController::class, 'EveningPrizeNo'])->name('EveningPrizeNo');

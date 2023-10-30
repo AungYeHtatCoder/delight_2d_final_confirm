@@ -7,13 +7,15 @@
 <div class="row justify-content-around" style="margin-top: 30px;">
     <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="{{ asset('user_app/assets/img/banners/lotto1.png') }}" style="max-height: 500px;" class="d-block w-100" alt="...">
+            @foreach($banners as $key=>$banner)
+            <div class="carousel-item active {{ $loop->first ? 'active' : '' }}">
+                <img src="{{ $banner->img_url }}" style="max-height: 500px;" class="d-block w-100" alt="...">
                 <marquee behavior="" direction="">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, odio! Amet inventore, modi perferendis consequuntur reiciendis, ducimus incidunt ut exercitationem tempora autem aliquam nostrum illum deleniti labore consectetur blanditiis sed.
                 </marquee>
             </div>
-            <div class="carousel-item">
+            @endforeach
+            {{-- <div class="carousel-item">
                 <img src="{{ asset('user_app/assets/img/banners/lotto2.png') }}" style="max-height: 500px;" class="d-block w-100" alt="...">
                 <marquee behavior="" direction="">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, odio! Amet inventore, modi perferendis consequuntur reiciendis, ducimus incidunt ut exercitationem tempora autem aliquam nostrum illum deleniti labore consectetur blanditiis sed.
@@ -24,7 +26,7 @@
                 <marquee behavior="" direction="">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, odio! Amet inventore, modi perferendis consequuntur reiciendis, ducimus incidunt ut exercitationem tempora autem aliquam nostrum illum deleniti labore consectetur blanditiis sed.
                 </marquee>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>
