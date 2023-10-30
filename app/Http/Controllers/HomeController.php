@@ -52,11 +52,21 @@ class HomeController extends Controller
         $userId = auth()->id(); // Get logged in user's ID
         $playedMorningTwoDigits = User::getUserMorningTwoDigits($userId);
         $playedEveningTwoDigits = User::getUserEveningTwoDigits($userId);
-        return view('user_profile', [
+        return view('frontend.user_play_morning', [
             'morningDigits' => $playedMorningTwoDigits,
             'eveningDigits' => $playedEveningTwoDigits,
         ]);
     }
 }
+
+    public function UserPlayEveningRecord() {
+        $userId = auth()->id(); // Get logged in user's ID
+        //$playedMorningTwoDigits = User::getUserMorningTwoDigits($userId);
+        $playedEveningTwoDigits = User::getUserEveningTwoDigits($userId);
+        return view('frontend.user_play_evening', [
+            //'morningDigits' => $playedMorningTwoDigits,
+            'eveningDigits' => $playedEveningTwoDigits,
+        ]);
+    }
 
 }

@@ -5,9 +5,9 @@
 @endsection --}}
 
 @section('content')
-<h6 class="text-center mt-2 pb-2" style="color: #1aacac;">ငွေဖြည့်မည်</h6>
+<h6 class="text-center mt-2 pb-2" style="color: #1aacac;">ငွေထုတ်မည်</h6>
 
-<p style="color: #1aacac;"> ငွေဖြည့်သွင်းရန် Logo ပုံကို နိပ်ပါ</p>
+<p style="color: #1aacac;"> ငွေထုတ်ရန် Logo ပုံကို နိပ်ပါ</p>
 <div class="top-up-card">
  <div class="banks blur-image">
   <img src="{{ asset('user_app/assets/img/bank/kpay.png') }}"  onclick="showForm()" class="w-100" alt="">
@@ -30,26 +30,26 @@
 
 <div class="row">
 <div class="container" id="top-up-form" style="display: none;">
-  <form action="{{ route('user.StoreKpayFillMoney') }}" method="POST">
+  <form action="{{ route('user.StoreKpayWithdrawMoney') }}" method="POST">
     @csrf
   <div class="form-group">
     <p style="color: #1aacac;">ငွေလက်ခံမည့်ဖုန်းနံပါတ်</p>
     {{-- <input type="number" value="" class="form-control" name="" id="inputField"> --}}
     <input type="number" id="kpay_no" name="kpay_no" class="form-control" value="{{ $user->kpay_no }}">
-        <div class="input-group-append">
+        {{-- <div class="input-group-append">
             <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard()">Copy</button>
-        </div>
+        </div> --}}
   </div>
   <div class="form-group">
     <p style="color: #1aacac;">သင်၏ Kpay ဖုန်းနံပါတ်ထဲ့ပါ</p>
     <input type="number" value="" class="form-control" name="user_ph_no" id="inputField">
   </div>
-  <p class="mt-4" style="color: #1aacac;font-size: 14px;">လုပ်ဆောင်မှုအမှတ်စဥ် (နောက်ဆုံးဂဏန်း ၆ လုံး)</p>
+  {{-- <p class="mt-4" style="color: #1aacac;font-size: 14px;">လုပ်ဆောင်မှုအမှတ်စဥ် (နောက်ဆုံးဂဏန်း ၆ လုံး)</p>
         <div class="form-group">
             <input type="number" class="form-control" placeholder="ဂဏန်းခြောက်လုံး ဖြည့်ပါ" name="last_six_digit" id="">
-        </div>
+        </div> --}}
   <div class="form-group">
-    <p style="color: #1aacac;">ငွေဖြည့်ပမာဏ</p>
+    <p style="color: #1aacac;">ငွေထုတ်ယူမည့်ပမာဏထဲ့ပါ</p>
     <input type="number" value="" class="form-control" name="amount" id="amountInput">
 </div>
 
@@ -77,7 +77,7 @@
     </div>
     <div class="form-group">
     {{-- <a href="{{ route('user.continueUserKpayFillMoney') }}" class="btn top-up-btn" >Continue--</a> --}}
-    <button type="submit" class="submit-btn btn">ငွေဖြည့်မည်</button>
+    <button type="submit" class="submit-btn btn">ငွေထုတ်မည်</button>
 
     </div>
     </form>

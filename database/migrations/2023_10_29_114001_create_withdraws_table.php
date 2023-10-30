@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fill_balances', function (Blueprint $table) {
+        Schema::create('withdraws', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('kpay_no')->nullable();
@@ -19,12 +19,10 @@ return new class extends Migration
             $table->string('wavepay_no')->nullable();
             $table->string('ayapay_no')->nullable();
             $table->string('user_ph_no');
-            $table->string('last_six_digit');
             $table->float('amount');
-            // status 0 is pending, 1 is success, 2 is failed
-            $table->tinyInteger('status')->default(0);
+            // status is enum pending, success, failed
+            $table->enum('status', ['pending', 'accept', 'reject'])->default('pending');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-
             $table->timestamps();
         });
     }
@@ -34,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fill_balances');
+        Schema::dropIfExists('withdraws');
     }
 };

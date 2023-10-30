@@ -36,22 +36,6 @@ class Lottery extends Model
         return $this->belongsToMany(TwoDigit::class, 'lottery_two_digit_pivot')->withPivot('sub_amount', 'prize_sent')->withTimestamps();
     }
 
-    // for prize sent only 
-    // public function PrizeSentTwoDigits() {
-    //     return $this->belongsToMany(PrizeSentTwoDigit::class, 'lottery_two_digit_copy')->withPivot('sub_amount', 'prize_sent')->withTimestamps();
-    // }
-//     public function PrizeSentTwoDigits() {
-//     return $this->belongsToMany(PrizeSentTwoDigit::class, 'lottery_two_digit_copy')
-//         ->withPivot('two_digit_id','sub_amount', 'prize_sent')->withTimestamps();
-       
-// }
-// public function PrizeSentTwoDigitsEvening() {
-//     return $this->belongsToMany(PrizeSentTwoDigit::class, 'lottery_two_digit_copy')
-//         ->withPivot('sub_amount')
-//         ->wherePivot('session', 'evening'); // This ensures it's filtering based on session
-// }
-
-
     public function twoDigitsMorning()
     {
         $morningStart = Carbon::now()->startOfDay()->addHours(6);

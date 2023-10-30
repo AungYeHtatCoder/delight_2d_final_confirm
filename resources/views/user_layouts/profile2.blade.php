@@ -7,8 +7,8 @@
                 <div class="d-flex">
                   <i class="fa-regular fa-circle-user profile-icon d-block me-3"></i>
                   <div class="mt-2 text-white">
-                    <p class="mb-0">Stephen Suu</p>
-                    <p>လက်ကျန်ငွေ: 0 ကျပ်</p>
+                    <p class="mb-0">{{ Auth::user()->name }}</p>
+                    <p>လက်ကျန်ငွေ: {{ Auth::user()->balance }} ကျပ်</p>
                   </div>
                 </div>
                 {{-- <div class="mt-3">

@@ -5,32 +5,60 @@
 @endsection
 
 @section('content')
-<a href="{{ url('/myDigit') }}" class="card text-decoration-none text-dark shadow border border-1 p-3 my-3">
+<a href="{{ route('home') }}" class="card text-decoration-none text-dark shadow border border-1 p-3 my-3">
     <div class="d-flex justify-content-between">
         <div class="d-flex">
             <div class="me-3">
                 <i class="fas fa-list-ul twod-list"></i>
             </div>
-            <p class="pb-0 mb-0">ထီထိုးမှတ်တမ်း</p>
+            <p class="pb-0 mb-0">မနက်ပိုင်းထီထိုးမှတ်တမ်း</p>
         </div>
         <div>
             <i class="fas fa-play"></i>
         </div>
     </div>
 </a>
-<a href="{{ url('/winnerDigit') }}" class="card text-decoration-none text-dark shadow border border-1 p-3 my-3">
+<a href="{{ route('user.UserPlayEveningRecord') }}" class="card text-decoration-none text-dark shadow border border-1 p-3 my-3">
+    <div class="d-flex justify-content-between">
+        <div class="d-flex">
+            <div class="me-3">
+                <i class="fas fa-list-ul twod-list"></i>
+            </div>
+            <p class="pb-0 mb-0">ညနေပိုင်းထီထိုးမှတ်တမ်း</p>
+        </div>
+        <div>
+            <i class="fas fa-play"></i>
+        </div>
+    </div>
+</a>
+<a href="{{ route('user.MorningPrizeNo') }}" class="card text-decoration-none text-dark shadow border border-1 p-3 my-3">
     <div class="d-flex justify-content-between">
         <div class="d-flex">
             <div class="me-3">
                 <i class="fas fa-calendar-days twod-list text-danger"></i>
             </div>
-            <p class="pb-0 mb-0">ထွက်ဂဏန်းများ</p>
+            <p class="pb-0 mb-0">မနက်ပိုင်းထွက်ဂဏန်းများ</p>
         </div>
         <div>
             <i class="fas fa-play"></i>
         </div>
     </div>
 </a>
+
+<a href="{{ route('user.EveningPrizeNo') }}" class="card text-decoration-none text-dark shadow border border-1 p-3 my-3">
+    <div class="d-flex justify-content-between">
+        <div class="d-flex">
+            <div class="me-3">
+                <i class="fas fa-calendar-days twod-list text-danger"></i>
+            </div>
+            <p class="pb-0 mb-0">ညနေပိုင်းထွက်ဂဏန်းများ</p>
+        </div>
+        <div>
+            <i class="fas fa-play"></i>
+        </div>
+    </div>
+</a>
+
 <a href="" class="card text-decoration-none text-dark shadow border border-1 p-3 my-3">
     <div class="d-flex justify-content-between">
         <div class="d-flex">
@@ -102,7 +130,7 @@
             <div class="me-3">
                 <i class="fa-brands fa-google-play text-info twod-list"></i>
             </div>
-            <p class="pb-0 mb-0">ဗားရှင်း</p>
+            <p class="pb-0 mb-0">ဗားရှင်း - 1.0.0</p>
         </div>
         <!-- <div>
             <i class="fas fa-play"></i>
@@ -115,7 +143,13 @@
             <div class="me-3">
                 <i class="fas fa-power-off text-danger twod-list"></i>
             </div>
-            <p class="pb-0 mb-0">ထွက်ခွာရန်</p>
+            {{-- <p class="pb-0 mb-0">ထွက်ခွာရန်</p> --}}
+            <form action="{{ route('logout') }}" method="post">
+                    @csrf
+                    <button type="submit" class="pb-0 mb-0">
+                      ထွက်ခွာရန်
+                    </button>
+                  </form>
         </div>
         <div>
             <i class="fas fa-play"></i>

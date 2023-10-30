@@ -17,7 +17,7 @@
 <div class="d-sm-flex justify-content-between">
         <div>
           <a href="javascript:;" class="btn btn-icon bg-gradient-primary">
-            User Balance Access Dashboard
+            User Balance Withdraw Dashboard
           </a>
         </div>
         <div class="d-flex">
@@ -58,10 +58,10 @@
                     <th>Date</th>
                     <th>Status</th>
                     <th>Customer</th>
-                    <th>PaymentNo</th>
+                    <th>WithdrawNo</th>
                     <th>RecieveNo</th>
                     <th>Show</th>
-                    <th>SendBalance</th>
+                    {{-- <th>SendBalance</th> --}}
                   </tr>
                 </thead>
                 <tbody>
@@ -80,25 +80,32 @@
                     </td>
 <td class="text-xs font-weight-normal">
     <div class="d-flex align-items-center">
-        @if($balance->status === 1)
+        @if($balance->status === 'accept')
             <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-2 btn-sm d-flex align-items-center justify-content-center">
                 <i class="material-icons text-sm" aria-hidden="true">done</i>
             </button>
-            <span>Paid</span>
+            <span>Accept</span>
+        @elseif($balance->status === 'reject')
+            <button class="btn btn-icon-only btn-rounded btn-outline-danger mb-0 me-2 btn-sm d-flex align-items-center justify-content-center">
+                <i class="material-icons text-sm" aria-hidden="true">close</i>
+            </button>
+            <span>Reject</span>
+
         @else
             <button class="btn btn-icon-only btn-rounded btn-outline-danger mb-0 me-2 btn-sm d-flex align-items-center justify-content-center">
                 <i class="material-icons text-sm" aria-hidden="true">close</i>
             </button>
-            <span>Not Yet Pay</span>
+            <span>Pending</span>
         @endif
-        {{-- <form action="{{ route('admin.fill-balance-replies.update', $balance->id) }}" method="post" class="d-flex align-items-center ml-3">
+        <form action="{{ route('admin.withdrawViewUpdate', $balance->id) }}" method="post" class="d-flex align-items-center ml-3">
             @csrf
             @method('PUT')
             <select id="choices-category-edit" name="status" onchange="this.form.submit()">
-                <option value="0" {{ $balance->status === 0 ? 'selected' : '' }}>Not Yet Pay</option>
-                <option value="1" {{ $balance->status === 1 ? 'selected' : '' }}>Paid</option>
+                <option value="pending" {{ $balance->status === 'pending' ? 'selected' : '' }}>Pending</option>
+                <option value="accept" {{ $balance->status === 'accept' ? 'selected' : '' }}>Accept</option>
+                <option value="reject" {{ $balance->status === 'reject' ? 'selected' : '' }}>Reject</option>
             </select>
-        </form> --}}
+        </form>
     </div>
 </td>
 
@@ -110,7 +117,7 @@
                       </div>
                     </td>
                     <td class="text-xs font-weight-normal">
-                      <span class="my-2 text-xs">{{ $balance->last_six_digit }}</span>
+                      <span class="my-2 text-xs">{{ $balance->user_ph_no }}</span>
                     </td>
                     <td class="text-xs font-weight-normal">
                      {{-- @php
@@ -141,16 +148,15 @@
                     </td>
                     <td class="text-xs font-weight-normal">
                       {{-- go to show page --}}
-                      <a href="{{ route('admin.fill-balance-replies.show', $balance->id) }}" class="btn btn-icon btn-outline-dark btn-sm">
+                      <a href="{{ route('admin.withdrawViewDetails', $balance->id) }}" class="btn btn-icon btn-outline-dark btn-sm">
                         <i class="material-icons">remove_red_eye</i>
                       </a>
                     </td>
-                    <td class="text-xs font-weight-normal">
-                      {{-- go to send balance page --}}
+                    {{-- <td class="text-xs font-weight-normal">
                       <a href="{{ route('admin.fill-balance-replies.edit', $balance->id) }}" class="btn btn-icon btn-outline-dark btn-sm">
                         <i class="material-icons">send</i>
                       </a>
-                    </td>
+                    </td> --}}
                   </tr>
                   @endforeach
                 </tbody>

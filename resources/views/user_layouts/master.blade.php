@@ -18,7 +18,7 @@
 
     <!-- Bootstrap CSS 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <title>Delight Project</title>
+    <title>Diamond 2D | 3D</title>
   </head>
   <body>
       <!-- navbar section -->
@@ -31,7 +31,7 @@
 
                     <a href="{{ url('/') }}" class="text-decoration-none btn btn-sm text-white {{ request()->path() == "/twod" ? "d-none" : "" }}"><i class="fas fa-arrow-left"></i></a>
                 </div>
-                <h5 class="mx-auto">Delight 2D | 3D</h5>
+                <h5 class="mx-auto">Diamond 2D | 3D</h5>
                 <span class="material-icons" id="refresh">refresh</span>
               </div>
             </div>
@@ -56,7 +56,7 @@
                   </a>
                 </div>
                 <div class="text-center">
-                  <a href="{{ url('/wallet') }}" class="text-decoration-none footer-nav">
+                  <a href="{{ route('user.GetWallet') }}" class="text-decoration-none footer-nav">
                     <i class="fas fa-wallet d-block text-secondary footer-icon"></i>
                     <span class="d-block footer-text">ပိုက်ဆံအိတ်</span>
                   </a>

@@ -244,7 +244,7 @@
                         <span>အမြန်ရွေး</span>
                     </div>
                     <div class="col-3">
-                        <span>ပတ်လည်</span>
+                        <a href="{{ route('admin.GetTwoDigit')}}" style="text-decoration: none"><span style="color: #f8f9fa">Back</span></a>
                     </div>
                 </div>
                 <div class="col-12 mt-3">
@@ -314,11 +314,6 @@
         </div>
     @endif
 </div>
-
-
-
-
-
             </div>
         </div>
     </div>
@@ -395,59 +390,6 @@
                 amountInputsDiv.appendChild(amountInput);
             }
         }
-
-        //   function selectDigit(num, element) {
-        //     const selectedInput = document.getElementById('selected_digits');
-        //     const amountInputsDiv = document.getElementById('amountInputs');
-        //     let selectedDigits = selectedInput.value ? selectedInput.value.split(",") : [];
-
-        //     // Get the remaining amount for the selected digit
-        //     const remainingAmount = Number(element.querySelector('small').innerText.split(' ')[1]);
-
-        //     // Check if the user tries to bet more than the remaining amount
-        //     if (selectedDigits.includes(num)) {
-        //         const betAmountInput = document.getElementById('amount_' + num);
-        //         if (Number(betAmountInput.value) > remainingAmount) {
-        //             Swal.fire({
-        //                 icon: 'error',
-        //                 title: 'Bet Limit Exceeded',
-        //                 text: `You can only bet up to ${remainingAmount} for the digit ${num}.`
-        //             });
-        //             return;
-        //         }
-        //     }
-
-        //     // Check if the digit is already selected
-        //     if (selectedDigits.includes(num)) {
-        //       // If it is, remove the digit, its style, and its input field
-        //       selectedInput.value = selectedInput.value.replace(num, '').replace(',,', ',').replace(/^,|,$/g, '');
-        //       element.classList.remove('selected');
-        //       const inputToRemove = document.getElementById('amount_' + num);
-        //       amountInputsDiv.removeChild(inputToRemove);
-        //     } else {
-        //       // Otherwise, add the digit, its style, and its input field
-        //       selectedInput.value = selectedInput.value ? selectedInput.value + "," + num : num;
-        //       element.classList.add('selected');
-
-        //       const amountInput = document.createElement('input');
-        //       amountInput.setAttribute('type', 'number');
-        //       amountInput.setAttribute('name', 'amounts[' + num + ']');
-        //       amountInput.setAttribute('id', 'amount_' + num);
-        //       amountInput.setAttribute('placeholder', 'Amount for ' + num);
-        //       amountInput.setAttribute('min', '100');
-        //       amountInput.setAttribute('max', '5000');
-        //       amountInput.setAttribute('class', 'form-control mt-2');
-        //       amountInput.onchange = updateTotalAmount; // Add this line to call the total update function
-        //       amountInputsDiv.appendChild(amountInput);
-        //     }
-
-        //     //updateTotalAmount();
-        //     amountInput.onchange = function() {
-        //     updateTotalAmount();
-        //     checkBetAmount(this, num);  // Add this line
-        // };
-
-        //   }
         function checkBetAmount(inputElement, num) {
             // Replace the problematic line with the following code
             const digits = document.querySelectorAll('.digit');
@@ -479,24 +421,6 @@
                 inputElement.value = ""; // Reset the input value
             }
         }
-
-        //   function checkBetAmount(inputElement, num) {
-        //     // Get the remaining amount for the selected digit
-        //     const digitElement = document.querySelector(`.digit:contains('${num}')`);
-        //     const remainingAmount = Number(digitElement.querySelector('small').innerText.split(' ')[1]);
-
-        //     // Check if the entered bet amount exceeds the remaining amount
-        //     if (Number(inputElement.value) > remainingAmount) {
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: 'Bet Limit Exceeded',
-        //             text: `You can only bet up to ${remainingAmount} for the digit ${num}.`
-        //         });
-        //         inputElement.value = "";  // Reset the input value
-        //     }
-        // }
-
-
         // New function to calculate and display the total amount
         function updateTotalAmount() {
             let total = 0;
@@ -531,14 +455,7 @@
             document.getElementById('totalAmount').value = total;
         }
 
-        // function getRandomColor() {
-        //   const letters = '0123456789ABCDEF';
-        //   let color = '#';
-        //   for (let i = 0; i < 6; i++) {
-        //     color += letters[Math.floor(Math.random() * 16)];
-        //   }
-        //   return color;
-        // }
+
         // sweet alert
         document.querySelector('form').addEventListener('submit', function(event) {
             event.preventDefault(); // prevent the form from submitting immediately

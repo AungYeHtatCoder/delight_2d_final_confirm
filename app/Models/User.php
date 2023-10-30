@@ -167,39 +167,7 @@ public static function getUserMorningTwoDigits($userId) {
 }
 
 
-//     public static function getUserMorningTwoDigits($userId) {
-//     $morningTwoDigits = Lottery::where('user_id', $userId)
-//                                ->whereHas('lotteryMatch', function ($query) {
-//                                    $query->where('is_active', true);
-//                                })
-//                                ->with('twoDigitsMorning')
-//                                ->get()
-//                                ->pluck('twoDigitsMorning')
-//                                ->collapse(); // Collapse the collection to a single dimension
 
-//     return $morningTwoDigits;
-// }
-
-// public static function getUserMorningTwoDigits($userId) {
-//     $morningTwoDigits = Lottery::where('user_id', $userId)
-//                                ->whereHas('lotteryMatch', function ($query) {
-//                                    $query->where('is_active', [true, false]);
-//                                })
-//                                ->with('twoDigitsMorning')
-//                                ->get()
-//                                ->pluck('twoDigitsMorning')
-//                                ->collapse(); // Collapse the collection to a single dimension
-
-//     // Sum the sub_amount from the pivot table
-//     $totalAmount = $morningTwoDigits->sum(function ($twoDigit) {
-//         return $twoDigit->pivot->sub_amount;
-//     });
-
-//     return [
-//         'two_digits' => $morningTwoDigits,
-//         'total_amount' => $totalAmount
-//     ];
-// }
 public static function getUserEveningTwoDigits($userId) {
     $morningTwoDigits = Lottery::where('user_id', $userId)
                                ->with('twoDigitsEvening')
@@ -218,40 +186,6 @@ public static function getUserEveningTwoDigits($userId) {
     ];
 }
 
-// public static function getUserEveningTwoDigits($userId) {
-//     $morningTwoDigits = Lottery::where('user_id', $userId)
-//                                ->whereHas('lotteryMatch', function ($query) {
-//                                    $query->where('is_active', true);
-//                                })
-//                                ->with('twoDigitsEvening')
-//                                ->get()
-//                                ->pluck('twoDigitsEvening')
-//                                ->collapse(); // Collapse the collection to a single dimension
 
-//     // Sum the sub_amount from the pivot table
-//     $totalAmount = $morningTwoDigits->sum(function ($twoDigit) {
-//         return $twoDigit->pivot->sub_amount;
-//     });
-
-//     return [
-//         'two_digits' => $morningTwoDigits,
-//         'total_amount' => $totalAmount
-//     ];
-// }
-
-
-
-// public static function getUserEveningTwoDigits($userId) {
-//     $eveningTwoDigits = Lottery::where('user_id', $userId)
-//                                ->whereHas('lotteryMatch', function ($query) {
-//                                    $query->where('is_active', true);
-//                                })
-//                                ->with('twoDigitsEvening')
-//                                ->get()
-//                                ->pluck('twoDigitsEvening')
-//                                ->collapse(); // Collapse the collection to a single dimension
-
-//     return $eveningTwoDigits;
-// }
 
 }

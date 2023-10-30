@@ -12,7 +12,7 @@
                <span class="material-icons fa-bold" style="font-size: 40px;">account_balance_wallet</span>
                <p class="mt-2 px-2">လက်ကျန်ငွေ</p>              
               </div>
-              <p>0.00 Kyat</p>
+              <p>{{ Auth::user()->balance }}</p>
              </div>                                   
             </div>
             <div class="card event-card">

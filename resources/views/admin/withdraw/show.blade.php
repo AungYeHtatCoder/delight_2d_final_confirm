@@ -8,8 +8,8 @@
           <div class="nav-wrapper position-relative end-0">
             <ul class="nav nav-pills nav-fill p-1" role="tablist">
               <li class="nav-item">
-                <a class="nav-link mb-0 px-0 py-1 active btn btn-primary text-white"  href="{{ route('admin.fill-balance-replies.index') }}">
-                  Back To Balance Access Dashboard
+                <a class="nav-link mb-0 px-0 py-1 active btn btn-primary text-white"  href="{{ route('admin.withdrawViewGet') }}">
+                  Back To Balance Withdraw Dashboard
                 </a>
               </li>
               <li class="nav-item">
@@ -193,13 +193,13 @@
                   </div>
                   
                 </li>
-                <li class="list-group-item border-0 d-flex justify-content-between ps-0 border-radius-lg">
+                {{-- <li class="list-group-item border-0 d-flex justify-content-between ps-0 border-radius-lg">
                   <div class="d-flex flex-column">
                     <h6 class="text-dark mb-1 font-weight-bold text-sm">လုပ်ငန်းစဉ်အမှတ် : {{ $balance->last_six_digit }}</h6>
                     
                   </div>
                   
-                </li>
+                </li> --}}
 
                 <li class="list-group-item border-0 d-flex justify-content-between ps-0 border-radius-lg">
                   <div class="d-flex flex-column">

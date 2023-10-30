@@ -7,8 +7,8 @@
                 <div class="d-flex">
                   <i class="fa-regular fa-circle-user profile-icon d-block me-3"></i>
                   <div class="mt-2 text-white">
-                    <p class="mb-0">Stephen Suu</p>
-                    <p>+95912345678</p>
+                    {{-- <p class="mb-0">Stephen Suu</p>
+                    <p>+95912345678</p> --}}
                   </div>
                 </div>
                 <div class="mt-3">
@@ -19,10 +19,14 @@
             <div class="col-12">
               <div class="card child-div px-3 py-2">
                 <div class="d-flex">
-                  <p class="text-danger me-2 pb-0 mb-0">လက်ကျန်ငွေ (ကျပ်)</p>
+                  <p class="text-danger me-2 pb-0 mb-0">
+                    <a href="{{ route('login') }}">
+                      အကောင့်ဝင်ပါ
+                    </a>
+                  </p>
                   <i class="fas fa-eye d-block mt-1 text-primary" style="font-size: 18px;"></i>
                 </div>
-                <span class="text-primary font-weight-bold d-block">0.00</span>
+                {{-- <span class="text-primary font-weight-bold d-block">0.00</span> --}}
               </div>
             </div>
           </div>

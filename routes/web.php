@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\RolesController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\User\WalletController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\User\WithDrawController;
 use App\Http\Controllers\Admin\PlayTwoDController;
 use App\Http\Controllers\Admin\TwoDigitController;
 use App\Http\Controllers\Admin\PermissionController;
@@ -41,7 +43,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
  Write here User Side no need Auth Routes
  */
 Route::get('/', [App\Http\Controllers\User\WelcomeController::class, 'index'])->name('welcome');
-Route::get('/twod', [App\Http\Controllers\User\WelcomeController::class, 'twod']);
+// Route::get('/twod', [App\Http\Controllers\User\WelcomeController::class, 'twod']);
 Route::get('/wallet', [App\Http\Controllers\User\WelcomeController::class, 'wallet']);
 Route::get('/topUp', [App\Http\Controllers\User\WelcomeController::class, 'topUp']);
 Route::get('/withDraw', [App\Http\Controllers\User\WelcomeController::class, 'withDraw']);
@@ -116,6 +118,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'App\Http\Co
     Route::get('profile/kpay_fill_money', [ProfileController::class, 'index'])->name('kpay_fill_money');
     Route::resource('fill-balance-replies', FillBalanceReplyController::class);
     Route::get('/daily-income-json', [App\Http\Controllers\Admin\DailyTwodIncomeOutComeController::class, 'getTotalAmounts'])->name('dailyIncomeJson');
+    Route::get('/with-draw-view', [App\Http\Controllers\Admin\WithDrawViewController::class, 'index'])->name('withdrawViewGet');
+    Route::get('/with-draw-details/{id}', [App\Http\Controllers\Admin\WithDrawViewController::class, 'show'])->name('withdrawViewDetails');
+    // withdraw update route
+    Route::put('/with-draw-update/{id}', [App\Http\Controllers\Admin\WithDrawViewController::class, 'update'])->name('withdrawViewUpdate');
     Route::get('/daily-with-name-income-json', [App\Http\Controllers\Admin\DailyTwodIncomeOutComeController::class, 'getTotalAmountsDaily'])->name('getTotalAmountsDaily'); 
     // week name route
     Route::get('/weekly-income-json', [App\Http\Controllers\Admin\DailyTwodIncomeOutComeController::class, 'getTotalAmountsWeekly'])->name('getTotalAmountsWeekly'); 
@@ -126,7 +132,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'App\Http\Co
 
 });
 
-Route::get('/daily-income-json', [App\Http\Controllers\Admin\DailyTwodIncomeOutComeController::class, 'getTotalAmounts'])->name('dailyIncomeJson'); 
+// Route::get('/daily-income-json', [App\Http\Controllers\Admin\DailyTwodIncomeOutComeController::class, 'getTotalAmounts'])->name('dailyIncomeJson'); 
+
 Route::group(['prefix' => 'user', 'as' => 'user.', 'namespace' => 'App\Http\Controllers\Admin', 'middleware' => ['auth']], function () {
 
     /*
@@ -134,4 +141,36 @@ Route::group(['prefix' => 'user', 'as' => 'user.', 'namespace' => 'App\Http\Cont
     Write here Client Side Auth Routes
     **********
     */
+Route::get('/play-two-evening-record', [App\Http\Controllers\HomeController::class, 'UserPlayEveningRecord'])->name('UserPlayEveningRecord');
+Route::get('/morning-history-record', [App\Http\Controllers\User\PrizeNoController::class, 'MorningPrizeNo'])->name('MorningPrizeNo');
+Route::get('/evening-history-record', [App\Http\Controllers\User\PrizeNoController::class, 'EveningPrizeNo'])->name('EveningPrizeNo');
+Route::get('/two-d-top-up-wallet', [App\Http\Controllers\User\WalletController::class, 'GetWallet'])->name('GetWallet');
+// kpay route get method
+    Route::get('kpay-top-up-money', [WalletController::class, 'UserKpayFillMoney'])->name('UserKpayFillMoney');
+    // kpay fill money post method
+    Route::post('user-kpay-fill-money', [WalletController::class, 'StoreKpayFillMoney'])->name('StoreKpayFillMoney');
+    // cbpay fill money get method
+    Route::get('cbpay-top-up-money', [WalletController::class, 'UserCBPayFillMoney'])->name('UserCBPayFillMoney');
+
+    Route::post('cbpay-fill-money', [WalletController::class, 'StoreCBpayFillMoney'])->name('StoreCBpayFillMoney');
+
+    Route::get('wavepay-top-up-money', [WalletController::class, 'UserWavePayFillMoney'])->name('UserWavePayFillMoney');
+
+    Route::post('user-wavepay-fill-money', [WalletController::class, 'StoreWavepayFillMoney'])->name('StoreWavepayFillMoney');
+
+    Route::get('aya-pay-top-up-money', [WalletController::class, 'UserAYAPayFillMoney'])->name('UserAYAPayFillMoney');
+
+    Route::post('user-aya-pay-fill-money', [WalletController::class, 'StoreAYApayFillMoney'])->name('StoreAYApayFillMoney');
+
+    Route::get('k-pay-withdraw-money', [WithDrawController::class, 'UserKpayWithdrawMoney'])->name('UserKpayWithdrawMoney');
+    Route::post('k-pay-with-draw-money', [WithDrawController::class, 'StoreKpayWithdrawMoney'])->name('StoreKpayWithdrawMoney');
+
+    Route::get('cb-pay-withdraw-money', [WithDrawController::class, 'UserCBPayWithdrawMoney'])->name('UserCBPayWithdrawMoney');
+    Route::post('cb-pay-with-draw-money', [WithDrawController::class, 'StoreCBpayWithdrawMoney'])->name('StoreCBpayWithdrawMoney');
+
+    Route::get('wave-pay-withdraw-money', [WithDrawController::class, 'UserWavePayWithdrawMoney'])->name('UserWavePayWithdrawMoney');
+    Route::post('wave-pay-with-draw-money', [WithDrawController::class, 'StoreWavepayWithdrawMoney'])->name('StoreWavepayWithdrawMoney');
+
+    Route::get('aya-pay-withdraw-money', [WithDrawController::class, 'UserAYAPayWithdrawMoney'])->name('UserAYAPayWithdrawMoney');
+    Route::post('aya-pay-with-draw-money', [WithDrawController::class, 'StoreAYApayWithdrawMoney'])->name('StoreAYApayWithdrawMoney');
 });

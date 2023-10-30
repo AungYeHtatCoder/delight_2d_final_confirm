@@ -15,7 +15,7 @@
                 </a>
             </div>
             <div class="col">
-                <a href="{{ route('user.UserKpayWithdrawMoney') }}" style="color: black; text-decoration: none;">
+                <a href="{{ url('/withDraw') }}" style="color: black; text-decoration: none;">
                     <i class="fa-solid fa-money-bill-transfer"></i>
                     <p style="font-size: 11px;">KPay - ငွေထုတ်</p>
                 </a>
@@ -40,7 +40,7 @@
                 </a>
             </div>
             <div class="col">
-                <a href="{{ route('user.UserCBPayWithdrawMoney') }}" style="color: black; text-decoration: none;">
+                <a href="{{ url('/withDraw') }}" style="color: black; text-decoration: none;">
                     <i class="fa-solid fa-money-bill-transfer"></i>
                     <p style="font-size: 11px;">CBPay - ငွေထုတ်</p>
                 </a>
@@ -65,7 +65,7 @@
                 </a>
             </div>
             <div class="col">
-                <a href="{{ route('user.UserWavePayWithdrawMoney') }}" style="color: black; text-decoration: none;">
+                <a href="{{ url('/withDraw') }}" style="color: black; text-decoration: none;">
                     <i class="fa-solid fa-money-bill-transfer"></i>
                     <p style="font-size: 11px;">WavePay - ငွေထုတ်</p>
                 </a>
@@ -91,7 +91,7 @@
                 </a>
             </div>
             <div class="col">
-                <a href="{{ route('user.UserAYAPayWithdrawMoney') }}" style="color: black; text-decoration: none;">
+                <a href="{{ url('/withDraw') }}" style="color: black; text-decoration: none;">
                     <i class="fa-solid fa-money-bill-transfer"></i>
                     <p style="font-size: 11px;">AYAPay - ငွေထုတ်</p>
                 </a>
