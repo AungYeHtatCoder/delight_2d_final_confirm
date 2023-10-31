@@ -144,6 +144,8 @@ class TwoDPlayController extends Controller
         })->get();
         Notification::send($admins, new TwoDigitPlayedNotification($user));
         DB::commit();
+        session()->flash('SuccessRequest', 'သိန်းထီဆုကြီးပေါက်ပါစေ.');
+
         return redirect()->back()->with('message', 'Data stored successfully!');
     } catch (\Exception $e) {
         DB::rollback();

@@ -1,4 +1,7 @@
 @extends('user_layouts.master')
+@section('style')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css">
+@endsection
 @section('content')
     <p class="text-center mt-3 text-green">ထီထိုးမှတ်တမ်း</p>
     <div class="d-flex justify-content-between">

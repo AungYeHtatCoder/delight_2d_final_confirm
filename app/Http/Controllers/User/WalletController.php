@@ -104,6 +104,7 @@ class WalletController extends Controller
         $fillBalance->status = 0;  // default to 'pending'
 
         $fillBalance->save();
+        session()->flash('SuccessRequest', 'သင့်အကောင့်သို့ငွေဖြည့်ရန်တောင်းဆိုပြီးပါပီး .');
 
         // Redirect back with a success message
         return redirect()->back()->with('success', 'Money fill request submitted successfully!');
@@ -129,6 +130,7 @@ class WalletController extends Controller
         $fillBalance->status = 0;  // default to 'pending'
 
         $fillBalance->save();
+        session()->flash('SuccessRequest', 'သင့်အကောင့်သို့ငွေဖြည့်ရန်တောင်းဆိုပြီးပါပီး .');
 
         // Redirect back with a success message
         return redirect()->back()->with('success', 'Money fill request submitted successfully!');
@@ -154,6 +156,7 @@ class WalletController extends Controller
         $fillBalance->status = 0;  // default to 'pending'
 
         $fillBalance->save();
+        session()->flash('SuccessRequest', 'သင့်အကောင့်သို့ငွေဖြည့်ရန်တောင်းဆိုပြီးပါပီး .');
 
         // Redirect back with a success message
         return redirect()->back()->with('success', 'Money fill request submitted successfully!');

@@ -80,7 +80,7 @@
                     </td>
 <td class="text-xs font-weight-normal">
     <div class="d-flex align-items-center">
-        @if($balance->status === 1)
+        @if($balance->status == 1)
             <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-2 btn-sm d-flex align-items-center justify-content-center">
                 <i class="material-icons text-sm" aria-hidden="true">done</i>
             </button>

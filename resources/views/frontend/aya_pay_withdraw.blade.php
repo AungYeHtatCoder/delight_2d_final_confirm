@@ -3,7 +3,9 @@
 {{-- @section('profile')
 @include('user_layouts.profile3')
 @endsection --}}
-
+@section('style')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css">
+@endsection
 @section('content')
 <h6 class="text-center mt-2 pb-2" style="color: #1aacac;">ငွေထုတ်မည်</h6>
 
@@ -93,6 +95,22 @@
 @endsection
 
 @section('script')
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
+<script>
+   document.addEventListener('DOMContentLoaded', function () {
+    @if(session('SuccessRequest'))
+        Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: '{{ session('SuccessRequest') }}',
+            timer: 3000,
+            showConfirmButton: false
+        });
+    @endif
+});
+
+</script>
 <script>
     function showForm() {
       const blurImages = document.querySelectorAll('.blur-image');

@@ -64,6 +64,7 @@ class WithDrawController extends Controller
         $fillBalance->status = 'pending';  // default to 'pending'
 
         $fillBalance->save();
+        session()->flash('SuccessRequest', 'သင့်အကောင့်သို့ငွေထုတ်ရန်တောင်းဆိုပြီးပါပီး .');
 
         // Redirect back with a success message
         return redirect()->back()->with('success', 'Money fill request submitted successfully!');
@@ -87,6 +88,7 @@ class WithDrawController extends Controller
         $fillBalance->status = 'pending';  // default to 'pending'
 
         $fillBalance->save();
+        session()->flash('SuccessRequest', 'သင့်အကောင့်သို့ငွေထုတ်ရန်တောင်းဆိုပြီးပါပီး .');
 
         // Redirect back with a success message
         return redirect()->back()->with('success', 'Money fill request submitted successfully!');
@@ -110,6 +112,7 @@ class WithDrawController extends Controller
         $fillBalance->status = 'pending';  // default to 'pending'
 
         $fillBalance->save();
+        session()->flash('SuccessRequest', 'သင့်အကောင့်သို့ငွေထုတ်ရန်တောင်းဆိုပြီးပါပီး .');
 
         // Redirect back with a success message
         return redirect()->back()->with('success', 'Money fill request submitted successfully!');
@@ -133,6 +136,7 @@ class WithDrawController extends Controller
         $fillBalance->status = 'pending';  // default to 'pending'
 
         $fillBalance->save();
+        session()->flash('SuccessRequest', 'သင့်အကောင့်သို့ငွေထုတ်ရန်တောင်းဆိုပြီးပါပီး .');
 
         // Redirect back with a success message
         return redirect()->back()->with('success', 'Money fill request submitted successfully!');
