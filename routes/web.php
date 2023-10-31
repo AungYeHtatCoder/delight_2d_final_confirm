@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\TwoDWinnerController;
 use App\Http\Controllers\Admin\FillBalanceController;
 use App\Http\Controllers\Admin\TwoDLotteryController;
+use App\Http\Controllers\User\ChangePasswordController;
 use App\Http\Controllers\Admin\FillBalanceReplyController;
 use App\Http\Controllers\Admin\TwoDEveningWinnerController;
 use App\Http\Controllers\Admin\TwoDWinnerHistoryController;
@@ -173,4 +174,6 @@ Route::get('/two-d-top-up-wallet', [App\Http\Controllers\User\WalletController::
 
     Route::get('aya-pay-withdraw-money', [WithDrawController::class, 'UserAYAPayWithdrawMoney'])->name('UserAYAPayWithdrawMoney');
     Route::post('aya-pay-with-draw-money', [WithDrawController::class, 'StoreAYApayWithdrawMoney'])->name('StoreAYApayWithdrawMoney');
+    Route::get('/change-new-password-form', [ChangePasswordController::class, 'showChangePasswordForm'])->name('showChangePasswordForm');
+    Route::put('/change-new-password', [ChangePasswordController::class, 'ChangenewPassword'])->name('changeNewPassword');
 });

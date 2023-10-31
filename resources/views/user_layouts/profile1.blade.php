@@ -20,11 +20,18 @@
               <div class="card child-div px-3 py-2">
                 <div class="d-flex">
                   <p class="text-danger me-2 pb-0 mb-0">
-                    <a href="{{ route('login') }}">
+                    @auth 
+                      {{ auth()->user()->name }}
+                    @endauth
+                    @guest
+                      <a href="{{ route('login') }}" style="text-decoration: none">
                       အကောင့်ဝင်ပါ
                     </a>
+                    @endguest
+
                   </p>
-                  <i class="fas fa-eye d-block mt-1 text-primary" style="font-size: 18px;"></i>
+                  {{-- <i class="fas fa-eye d-block mt-1 text-primary" style="font-size: 18px;"></i> --}}
+                 
                 </div>
                 {{-- <span class="text-primary font-weight-bold d-block">0.00</span> --}}
               </div>

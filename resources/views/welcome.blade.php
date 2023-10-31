@@ -1,5 +1,12 @@
 @extends('user_layouts.master')
+@section('style')
+<style>
+    .content-color {
+    background-color: #c91515;
+}
 
+</style>
+@endsection
 @section('profile')
 @include('user_layouts.profile1')
 @endsection
@@ -10,28 +17,28 @@
             @foreach($banners as $key=>$banner)
             <div class="carousel-item active {{ $loop->first ? 'active' : '' }}">
                 <img src="{{ $banner->img_url }}" style="max-height: 500px;" class="d-block w-100" alt="...">
-                <marquee behavior="" direction="">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, odio! Amet inventore, modi perferendis consequuntur reiciendis, ducimus incidunt ut exercitationem tempora autem aliquam nostrum illum deleniti labore consectetur blanditiis sed.
+                <marquee behavior="" direction="" style="background-color: blue; color:aliceblue">
+                    Thai 2D - 3D App သည် Thai နိုင်ငံ Official App ဖြစ်ပြီး ၂၄ နာရီ ကြားခံမလိုပဲ ငွေသွင်းငွေထုတ်လုပ်နိုင်ပါသည်။
                 </marquee>
             </div>
             @endforeach
-            {{-- <div class="carousel-item">
-                <img src="{{ asset('user_app/assets/img/banners/lotto2.png') }}" style="max-height: 500px;" class="d-block w-100" alt="...">
-                <marquee behavior="" direction="">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, odio! Amet inventore, modi perferendis consequuntur reiciendis, ducimus incidunt ut exercitationem tempora autem aliquam nostrum illum deleniti labore consectetur blanditiis sed.
+            <div class="carousel-item">
+                <img src="{{ $banner->img_url }}" style="max-height: 500px;" class="d-block w-100" alt="...">
+                <marquee behavior="" direction="" style="background-color: blue; color:aliceblue">
+                    Thai 2D - 3D App သည် Thai နိုင်ငံ Official App ဖြစ်ပြီး ၂၄ နာရီ ကြားခံမလိုပဲ ငွေသွင်းငွေထုတ်လုပ်နိုင်ပါသည်။
                 </marquee>
             </div>
             <div class="carousel-item">
-                <img src="{{ asset('user_app/assets/img/banners/lotto3.png') }}" style="max-height: 500px;" class="d-block w-100" alt="...">
-                <marquee behavior="" direction="">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, odio! Amet inventore, modi perferendis consequuntur reiciendis, ducimus incidunt ut exercitationem tempora autem aliquam nostrum illum deleniti labore consectetur blanditiis sed.
+                <img src="{{ $banner->img_url }}" style="max-height: 500px;" class="d-block w-100" alt="...">
+                <marquee behavior="" direction="" style="background-color: blue; color:aliceblue">
+                    Thai 2D - 3D App သည် Thai နိုင်ငံ Official App ဖြစ်ပြီး ၂၄ နာရီ ကြားခံမလိုပဲ ငွေသွင်းငွေထုတ်လုပ်နိုင်ပါသည်။
                 </marquee>
-            </div> --}}
+            </div>
         </div>
     </div>
 </div>
 <div class="my-3">
-    <div class="d-flex justify-content-around">
+    <div class="d-flex justify-content-around content-color">
         <div class="">
             <div class="item-box"><h4><a href="{{ route('admin.GetTwoDigit') }}">2D PLAY</a></h4></div>
             <a href="{{ route('admin.GetTwoDigit') }}" style="text-decoration: none;">
@@ -45,7 +52,7 @@
             </a>
         </div>
     </div>
-    <div class="d-flex justify-content-around">
+    <div class="d-flex justify-content-around content-color">
         <div class="">
             <div class="image-box"><h4><a href=""><img class="w-100" src="{{ asset('/user_app/assets/img/logo/logo1.jpg') }}" alt=""></a></h4></div>
             <a href="" style="text-decoration: none;">
@@ -61,39 +68,10 @@
                 </h4>
             </div>
             <a href="" style="text-decoration: none;">
-                <p class="item-text">2D</p>
+                <p class="item-text">3D</p>
             </a>
         </div>
     </div>
-    <div class="d-flex justify-content-around">
-        <div class="">
-            <div class="image-box"><h4><a href=""><img class="w-100" src="{{ asset('/user_app/assets/img/logo/logo1.jpg') }}" alt=""></a></h4></div>
-            <a href="" style="text-decoration: none;"><p class="item-text">2D</p></a>
-        </div>
-        <div class="">
-            <div class="image-box"><h4><a href=""><img class="w-100" src="{{ asset('/user_app/assets/img/logo/logo1.jpg') }}" alt=""></a></h4></div>
-            <a href="" style="text-decoration: none;"><p class="item-text">2D</p></a>
-        </div>
-    </div>
-    <div class="d-flex justify-content-around">
-        <div class="">
-            <div class="image-box"><h4><a href=""><img class="w-100" src="{{ asset('/user_app/assets/img/logo/logo1.jpg') }}" alt=""></a></h4></div>
-            <a href="" style="text-decoration: none;"><p class="item-text">2D</p></a>
-        </div>
-        <div class="">
-            <div class="image-box"><h4><a href=""><img class="w-100" src="{{ asset('/user_app/assets/img/logo/logo1.jpg') }}" alt=""></a></h4></div>
-            <a href="" style="text-decoration: none;"><p class="item-text">2D</p></a>
-        </div>
-    </div>
-    <div class="d-flex justify-content-around">
-        <div class="">
-            <div class="image-box"><h4><a href=""><img class="w-100" src="{{ asset('/user_app/assets/img/logo/logo1.jpg') }}" alt=""></a></h4></div>
-            <a href="" style="text-decoration: none;"><p class="item-text">2D</p></a>
-        </div>
-        <div class="">
-            <div class="image-box"><h4><a href=""><img class="w-100" src="{{ asset('/user_app/assets/img/logo/logo1.jpg') }}" alt=""></a></h4></div>
-            <a href="" style="text-decoration: none;"><p class="item-text">2D</p></a>
-        </div>
-    </div>
+    
 </div>
 @endsection

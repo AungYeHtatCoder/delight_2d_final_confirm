@@ -24,7 +24,6 @@ return new class extends Migration
             // status 0 is pending, 1 is success, 2 is failed
             $table->tinyInteger('status')->default(0);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-
             $table->timestamps();
         });
     }

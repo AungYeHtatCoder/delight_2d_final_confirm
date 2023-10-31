@@ -1,0 +1,30 @@
+<div class="d-flex justify-content-around">
+        <div class="">
+            <div class="image-box"><h4><a href=""><img class="w-100" src="{{ asset('/user_app/assets/img/logo/logo1.jpg') }}" alt=""></a></h4></div>
+            <a href="" style="text-decoration: none;"><p class="item-text">2D</p></a>
+        </div>
+        <div class="">
+            <div class="image-box"><h4><a href=""><img class="w-100" src="{{ asset('/user_app/assets/img/logo/logo1.jpg') }}" alt=""></a></h4></div>
+            <a href="" style="text-decoration: none;"><p class="item-text">2D</p></a>
+        </div>
+    </div>
+    <div class="d-flex justify-content-around">
+        <div class="">
+            <div class="image-box"><h4><a href=""><img class="w-100" src="{{ asset('/user_app/assets/img/logo/logo1.jpg') }}" alt=""></a></h4></div>
+            <a href="" style="text-decoration: none;"><p class="item-text">2D</p></a>
+        </div>
+        <div class="">
+            <div class="image-box"><h4><a href=""><img class="w-100" src="{{ asset('/user_app/assets/img/logo/logo1.jpg') }}" alt=""></a></h4></div>
+            <a href="" style="text-decoration: none;"><p class="item-text">2D</p></a>
+        </div>
+    </div>
+    <div class="d-flex justify-content-around">
+        <div class="">
+            <div class="image-box"><h4><a href=""><img class="w-100" src="{{ asset('/user_app/assets/img/logo/logo1.jpg') }}" alt=""></a></h4></div>
+            <a href="" style="text-decoration: none;"><p class="item-text">2D</p></a>
+        </div>
+        <div class="">
+            <div class="image-box"><h4><a href=""><img class="w-100" src="{{ asset('/user_app/assets/img/logo/logo1.jpg') }}" alt=""></a></h4></div>
+            <a href="" style="text-decoration: none;"><p class="item-text">2D</p></a>
+        </div>
+    </div>
