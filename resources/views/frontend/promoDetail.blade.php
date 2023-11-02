@@ -27,3 +27,4 @@
     </div>
  </div>
 @endsection
+@include('user_layouts.footer')

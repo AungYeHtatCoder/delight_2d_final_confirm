@@ -7,92 +7,95 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css">
 @endsection
 @section('content')
-<h6 class="text-center mt-2 pb-2" style="color: #1aacac;">ငွေဖြည့်မည်</h6>
+<div style="padding-bottom: 100px;background-color: #fdd9d9; min-height: 100vh;">
+    <h6 class="text-center mt-2 pb-2" style="color: #ab0000;">ငွေဖြည့်မည်</h6>
+    <p style="color: #ab0000;"> ငွေဖြည့်သွင်းရန် Logo ပုံကို နိပ်ပါ</p>
+    <div class="top-up-card">
+     {{-- <div class="banks blur-image">
+      <img src="{{ asset('user_app/assets/img/bank/kpay.png') }}"  onclick="showForm()" class="w-100" alt="">
+     </div> --}}
+     <div class="banks blur-image">
+      <img src="{{ asset('user_app/assets/img/bank/wpay.png') }}" onclick="showForm()" class="w-100" alt="">
+     </div>
+     {{-- <div class="banks blur-image">
+      <img src="{{ asset('user_app/assets/img/bank/cbpay.png') }}" onclick="showForm()" class="w-100" alt="">
 
-<p style="color: #1aacac;"> ငွေဖြည့်သွင်းရန် Logo ပုံကို နိပ်ပါ</p>
-<div class="top-up-card">
- {{-- <div class="banks blur-image">
-  <img src="{{ asset('user_app/assets/img/bank/kpay.png') }}"  onclick="showForm()" class="w-100" alt="">
- </div> --}}
- <div class="banks blur-image">
-  <img src="{{ asset('user_app/assets/img/bank/wpay.png') }}" onclick="showForm()" class="w-100" alt="">
- </div>
- {{-- <div class="banks blur-image">
-  <img src="{{ asset('user_app/assets/img/bank/cbpay.png') }}" onclick="showForm()" class="w-100" alt="">
-  
- </div> --}}
- {{-- <div class="banks blur-image">
-  <img src="{{ asset('user_app/assets/img/bank/aya_logo.png') }}" onclick="showForm()" class="w-100" alt="">
- </div> --}}
-</div>
+     </div> --}}
+     {{-- <div class="banks blur-image">
+      <img src="{{ asset('user_app/assets/img/bank/aya_logo.png') }}" onclick="showForm()" class="w-100" alt="">
+     </div> --}}
+    </div>
 
-<div class="text-center mt-3">
-<p style="color: #1aacac;">လက်ကျန်ငွေ: {{ Auth::user()->balance }} ကျပ်</p>
-</div>
-<hr class="my-custom-line">
+    <div class="text-center mt-3">
+    <p style="color: #ab0000;">လက်ကျန်ငွေ: {{ Auth::user()->balance }} ကျပ်</p>
+    </div>
+    <hr class="my-custom-line">
 
-<div class="row">
-<div class="container" id="top-up-form" style="display: none;">
-  <form action="{{ route('user.StoreWavepayFillMoney') }}" method="POST">
-    @csrf
-  <div class="form-group">
-    <p style="color: #1aacac;">ငွေလက်ခံမည့်ဖုန်းနံပါတ်</p>
-    {{-- <input type="number" value="" class="form-control" name="" id="inputField"> --}}
-    <input type="number" id="kpay_no" name="wavepay_no" class="form-control" value="{{ $user->wavepay_no }}">
-        <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard()">Copy</button>
+    <div class="row">
+    <div class="container" id="top-up-form" style="display: none;">
+      <form action="{{ route('user.StoreWavepayFillMoney') }}" method="POST">
+        @csrf
+      <div class="form-group">
+        <p style="color: #ab0000;">ငွေလက်ခံမည့်ဖုန်းနံပါတ်</p>
+        {{-- <input type="number" value="" class="form-control" name="" id="inputField"> --}}
+        <input type="number" id="kpay_no" name="wavepay_no" class="form-control" value="{{ $user->wavepay_no }}">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard()">Copy</button>
+            </div>
+      </div>
+      <div class="form-group">
+        <p style="color: #ab0000;">သင်၏ Wavepay ဖုန်းနံပါတ်ထဲ့ပါ</p>
+        <input type="number" value="" class="form-control" name="user_ph_no" id="inputField">
+      </div>
+      {{-- <div class="form-group">
+        <p style="color: #ab0000;">ငွေဖြည့်ပမာဏ</p>
+        <input type="number" value="" class="form-control" name="" id="inputField">
+      </div> --}}
+      <p class="mt-4" style="color: #ab0000;font-size: 14px;">လုပ်ဆောင်မှုအမှတ်စဥ် (နောက်ဆုံးဂဏန်း ၆ လုံး)</p>
+            <div class="form-group">
+                <input type="number" class="form-control" placeholder="ဂဏန်းခြောက်လုံး ဖြည့်ပါ" name="last_six_digit" id="">
+            </div>
+      <div class="form-group">
+        <p style="color: #ab0000;">ငွေဖြည့်ပမာဏ</p>
+        <input type="number" value="" class="form-control" name="amount" id="amountInput">
+    </div>
+
+    <div class="d-flex justify-content-between m-3">
+        <div class="fill-box" data-value="1000" onclick="fillInputBox(this)">
+          <p>1,000</p>
         </div>
-  </div>
-  <div class="form-group">
-    <p style="color: #1aacac;">သင်၏ Wavepay ဖုန်းနံပါတ်ထဲ့ပါ</p>
-    <input type="number" value="" class="form-control" name="user_ph_no" id="inputField">
-  </div>
-  {{-- <div class="form-group">
-    <p style="color: #1aacac;">ငွေဖြည့်ပမာဏ</p>
-    <input type="number" value="" class="form-control" name="" id="inputField">
-  </div> --}}
-  <p class="mt-4" style="color: #1aacac;font-size: 14px;">လုပ်ဆောင်မှုအမှတ်စဥ် (နောက်ဆုံးဂဏန်း ၆ လုံး)</p>
+        <div class="fill-box" data-value="5000" onclick="fillInputBox(this)">
+          5,000
+        </div>
+        <div class="fill-box" data-value="10000" onclick="fillInputBox(this)">
+          10,000
+        </div>
+        </div>
+        <div class="d-flex justify-content-between m-3">
+        <div class="fill-box" data-value="100000" onclick="fillInputBox(this)">
+          100,000
+        </div>
+        <div class="fill-box" data-value="200000" onclick="fillInputBox(this)">
+          200,000
+        </div>
+        <div class="fill-box" data-value="500000" onclick="fillInputBox(this)">
+          500,000
+        </div>
+        </div>
         <div class="form-group">
-            <input type="number" class="form-control" placeholder="ဂဏန်းခြောက်လုံး ဖြည့်ပါ" name="last_six_digit" id="">
+        {{-- <a href="{{ route('user.continueUserKpayFillMoney') }}" class="btn top-up-btn" >Continue--</a> --}}
+        <button type="submit" class="submit-btn btn">ငွေဖြည့်မည်</button>
+
         </div>
-  <div class="form-group">
-    <p style="color: #1aacac;">ငွေဖြည့်ပမာဏ</p>
-    <input type="number" value="" class="form-control" name="amount" id="amountInput">
+        </form>
+      </div>
+
+    </div>
 </div>
 
-    <div class="d-flex justify-content-between m-3">
-    <div class="fill-box" data-value="1000" onclick="fillInputBox(this)">
-      <p>1,000</p>
-    </div>
-    <div class="fill-box" data-value="5000" onclick="fillInputBox(this)">
-      5,000
-    </div>
-    <div class="fill-box" data-value="10000" onclick="fillInputBox(this)">
-      10,000
-    </div>
-    </div>
-    <div class="d-flex justify-content-between m-3">
-    <div class="fill-box" data-value="100000" onclick="fillInputBox(this)">
-      100,000
-    </div>
-    <div class="fill-box" data-value="200000" onclick="fillInputBox(this)">
-      200,000
-    </div>
-    <div class="fill-box" data-value="500000" onclick="fillInputBox(this)">
-      500,000
-    </div>
-    </div>
-    <div class="form-group">
-    {{-- <a href="{{ route('user.continueUserKpayFillMoney') }}" class="btn top-up-btn" >Continue--</a> --}}
-    <button type="submit" class="submit-btn btn">ငွေဖြည့်မည်</button>
-
-    </div>
-    </form>
-  </div>
-
-</div>
 
 @endsection
+@include('user_layouts.footer')
 
 @section('script')
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>

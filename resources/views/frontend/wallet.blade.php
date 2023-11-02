@@ -5,8 +5,9 @@
 @endsection
 
 @section('content')
+<div class="mb-5" >
     <!-- cards section -->
-    <div class="card mb-5 child-div">
+    <div class="card mb-3 child-div">
         <div class="row pt-2 text-center">
             <div class="col">
                 <a href="{{ route('user.UserKpayFillMoney') }}" style="color: black; text-decoration: none;">
@@ -31,7 +32,7 @@
        </div>
     </div>
     {{-- card 2 --}}
-    <div class="card mb-5 child-div">
+    <div class="card mb-3 child-div">
         <div class="row pt-2 text-center">
             <div class="col">
                 <a href="{{ route('user.UserCBPayFillMoney') }}" style="color: black; text-decoration: none;">
@@ -56,7 +57,7 @@
        </div>
     </div>
     {{-- card 3 --}}
-    <div class="card mb-5 child-div">
+    <div class="card mb-3 child-div">
         <div class="row pt-2 text-center">
             <div class="col">
                 <a href="{{ route('user.UserWavePayFillMoney') }}" style="color: black; text-decoration: none;">
@@ -82,7 +83,7 @@
     </div>
 
     {{-- card 4 --}}
-    <div class="card mb-5 child-div">
+    <div class="card mb-3 child-div">
         <div class="row pt-2 text-center">
             <div class="col">
                 <a href="{{ route('user.UserAYAPayFillMoney') }}" style="color: black; text-decoration: none;">
@@ -107,7 +108,7 @@
        </div>
     </div>
     {{-- card end --}}
-    <div class="wallet-card" style="padding-bottom: 100px;">
+    <div class="wallet-card" style="padding-bottom: 100px; margin-bottom: 100px;">
         <h5 class="text-white text-center">ငွေဖြည့်လိုပါက</h5>
         <div class="p-3 text-left text-white">
             <p>၁။ "ငွေဖြည့်" ကို နှိပ်ပါ။</p>
@@ -116,4 +117,8 @@
         </div>
     </div>
     <!-- cards section -->
+</div>
+
 @endsection
+
+@include('user_layouts.footer')

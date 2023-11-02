@@ -1,22 +1,25 @@
-      <!-- profile section -->
-      <div class="row mb-1">
-        <div class="col-lg-4 col-md-4 offset-lg-4 offset-md-4 bg-green border broder-top-1 bg-green">
-          <div class="row parent-div" style="background: #2e97a7;">
+          <!-- profile section -->
+          <div
+            class="row parent-div"
+            style="
+              background: linear-gradient(
+                90deg,
+                rgba(212, 0, 0, 1) 0%,
+                rgba(212, 0, 0, 1) 52%,
+                rgba(255, 0, 0, 1) 100%
+              );
+            "
+          >
             <div class="col">
-              <div class="d-flex justify-content-between pt-3">
-                <div class="d-flex">
-                  <i class="fa-regular fa-circle-user profile-icon d-block me-3"></i>
-                  <div class="mt-2 text-white">
+              <div class="d-flex py-2">
+                <div>
+                  <i class="fa-regular fa-circle-user profile-icon"></i>
+                </div>
+                <div class="ms-3 text-white">
                     <p class="mb-0">{{ Auth::user()->name }}</p>
                     <p>လက်ကျန်ငွေ: {{ Auth::user()->balance }} ကျပ်</p>
-                  </div>
                 </div>
-                {{-- <div class="mt-3">
-                  <i class="fas fa-bell" style="font-size: 30px; color: white"></i>
-                </div> --}}
               </div>
             </div>
           </div>
-        </div>
-    </div>
-    <!-- profile section -->
+          <!-- profile section -->
