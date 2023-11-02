@@ -19,75 +19,71 @@
     <!-- Bootstrap CSS 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <title>Diamond 2D | 3D</title>
+    <style>
+        .image-container {
+          position: relative;
+          max-height: 500px;
+        }
+
+        .image {
+          max-width: 100%;
+          height: auto;
+        }
+
+        .marquee {
+          position: absolute;
+          width: 100%;
+          height: 30px;
+          left: 0;
+          bottom: 0;
+          background-color: rgba(255, 255, 255, 0.7); /* Background color with transparency */
+          overflow: hidden;
+        }
+
+        .marquee-text {
+          white-space: nowrap;
+          animation: marquee-scroll 10s linear infinite;
+        }
+
+        @keyframes marquee-scroll {
+          0% {
+            transform: translateX(100%);
+          }
+          100% {
+            transform: translateX(-100%);
+          }
+        }
+    </style>
   </head>
   @yield('style')
   <body>
-      <!-- navbar section -->
-      <div class="container-fluid fixed-top">
+    <div class="container-fluid" style="margin-top:60px;">
         <div class="row">
-          <div class="col-lg-4 col-md-4 offset-lg-4 offset-md-4 bg-green">
-            <div class="px-3 py-3">
-              <div class="d-flex justify-content-between">
-                <div>
-
-                    <a href="{{ url('/') }}" class="text-decoration-none btn btn-sm text-white {{ request()->path() == "/twod" ? "d-none" : "" }}"><i class="fas fa-arrow-left"></i></a>
-                </div>
-                <h5 class="mx-auto">Diamond 2D | 3D</h5>
-                <span class="material-icons" id="refresh">refresh</span>
+          <div class="col-lg-4 col-md-4 offset-lg-4 offset-md-4 pt-2" id="main-body">
+            <!-- navbar section -->
+              <div class="container-fluid fixed-top" >
+                  <div class="row">
+                    <div class="col-lg-4 col-md-4 offset-lg-4 offset-md-4 bg-green shadow" id="top-nav">
+                      <div class="px-3 py-3">
+                        <div class="d-flex justify-content-between">
+                          <div></div>
+                            <h5 class="mx-auto">
+                                <a href="{{ url('/') }}" class="text-decoration-none text-white">Delight 2D | 3D</a>
+                            </h5>
+                          <span class="material-icons" id="refresh">refresh</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
               </div>
-            </div>
+            <!-- navbar section -->
+
+            @yield('profile')
+            @yield('content')
+
           </div>
         </div>
     </div>
-    <!-- navbar section -->
-
-    <div class="container-fluid mt-5 pt-3 pb-5 mb-5">
-        @yield('profile')
-
-      <div class="row">
-        <div class="col-lg-4 col-md-4 offset-lg-4 offset-md-4">
-            @yield('content')
-          <footer class="row">
-            <div class="col-lg-4 col-md-4 offset-lg-4 offset-md-4 bg-light pt-4 pb-3">
-              <div class="d-flex justify-content-around">
-                <div class="text-center">
-                  <a href="{{ url('/') }}" class="text-decoration-none footer-nav">
-                    <i class="fas fa-house-chimney d-block text-secondary footer-icon"></i>
-                    <span class="d-block footer-text">ပင်မ</span>
-                  </a>
-                </div>
-                <div class="text-center">
-                  <a href="{{ route('user.GetWallet') }}" class="text-decoration-none footer-nav">
-                    <i class="fas fa-wallet d-block text-secondary footer-icon"></i>
-                    <span class="d-block footer-text">ပိုက်ဆံအိတ်</span>
-                  </a>
-                </div>
-                <div class="text-center">
-                  <a href="{{ url('/promo') }}" class="text-decoration-none footer-nav">
-                    <i class="fas fa-gift d-block text-secondary footer-icon"></i>
-                    <span class="d-block footer-text">ပရိုမိုရှင်း</span>
-                  </a>
-                </div>
-                <div class="text-center">
-                  <a href="{{ url('/service') }}" class="text-decoration-none footer-nav">
-                    <i class="fas fa-phone d-block text-secondary footer-icon"></i>
-                    <span class="d-block footer-text">ဝန်ဆောင်မှုဖုန်း</span>
-                  </a>
-                </div>
-                <div class="text-center">
-                  <a href="{{ url('/user/dashboard') }}" class="text-decoration-none footer-nav">
-                    <i class="fas fa-user d-block text-secondary footer-icon"></i>
-                    <span class="d-block footer-text">ကျွန်ုပ်</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </footer>
-        </div>
-      </div>
-    </div>
-
-
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -52,12 +52,14 @@ Route::get('/promo', [App\Http\Controllers\User\WelcomeController::class, 'promo
 Route::get('/promo/promo-detail', [App\Http\Controllers\User\WelcomeController::class, 'promoDetail']);
 Route::get('/service', [App\Http\Controllers\User\WelcomeController::class, 'servicePage']);
 Route::get('/winnerDigit', [App\Http\Controllers\User\WelcomeController::class, 'winnerDigit']);
+Route::get('/winnerPage', [App\Http\Controllers\User\WelcomeController::class, 'winnerPage']);
 Route::get('/myDigit', [App\Http\Controllers\User\WelcomeController::class, 'myDigit']);
 Route::get('/myBank', [App\Http\Controllers\User\WelcomeController::class, 'myBank']);
 Route::get('/changePassword', [App\Http\Controllers\User\WelcomeController::class, 'changePassword']);
 Route::get('/inviteCode', [App\Http\Controllers\User\WelcomeController::class, 'inviteCode']);
 Route::get('/comment', [App\Http\Controllers\User\WelcomeController::class, 'comment']);
-
+Route::get('/user_dashboard', [App\Http\Controllers\User\WelcomeController::class, 'user_dashboard']);
+Route::get('/winningRecord', [App\Http\Controllers\User\WelcomeController::class, 'winningRecord']);
 
 /* no need auth route end */
 
@@ -122,17 +124,17 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'App\Http\Co
     Route::get('/with-draw-details/{id}', [App\Http\Controllers\Admin\WithDrawViewController::class, 'show'])->name('withdrawViewDetails');
     // withdraw update route
     Route::put('/with-draw-update/{id}', [App\Http\Controllers\Admin\WithDrawViewController::class, 'update'])->name('withdrawViewUpdate');
-    Route::get('/daily-with-name-income-json', [App\Http\Controllers\Admin\DailyTwodIncomeOutComeController::class, 'getTotalAmountsDaily'])->name('getTotalAmountsDaily'); 
+    Route::get('/daily-with-name-income-json', [App\Http\Controllers\Admin\DailyTwodIncomeOutComeController::class, 'getTotalAmountsDaily'])->name('getTotalAmountsDaily');
     // week name route
-    Route::get('/weekly-income-json', [App\Http\Controllers\Admin\DailyTwodIncomeOutComeController::class, 'getTotalAmountsWeekly'])->name('getTotalAmountsWeekly'); 
+    Route::get('/weekly-income-json', [App\Http\Controllers\Admin\DailyTwodIncomeOutComeController::class, 'getTotalAmountsWeekly'])->name('getTotalAmountsWeekly');
     // month name route
-    Route::get('/month-with-name-income-json', [App\Http\Controllers\Admin\DailyTwodIncomeOutComeController::class, 'getTotalAmountsMonthly'])->name('getTotalAmountsMonthly'); 
+    Route::get('/month-with-name-income-json', [App\Http\Controllers\Admin\DailyTwodIncomeOutComeController::class, 'getTotalAmountsMonthly'])->name('getTotalAmountsMonthly');
     // year name route
-    Route::get('/yearly-income-json', [App\Http\Controllers\Admin\DailyTwodIncomeOutComeController::class, 'getTotalAmountsYearly'])->name('getTotalAmountsYearly'); 
+    Route::get('/yearly-income-json', [App\Http\Controllers\Admin\DailyTwodIncomeOutComeController::class, 'getTotalAmountsYearly'])->name('getTotalAmountsYearly');
 
 });
 
-// Route::get('/daily-income-json', [App\Http\Controllers\Admin\DailyTwodIncomeOutComeController::class, 'getTotalAmounts'])->name('dailyIncomeJson'); 
+// Route::get('/daily-income-json', [App\Http\Controllers\Admin\DailyTwodIncomeOutComeController::class, 'getTotalAmounts'])->name('dailyIncomeJson');
 
 Route::group(['prefix' => 'user', 'as' => 'user.', 'namespace' => 'App\Http\Controllers\Admin', 'middleware' => ['auth']], function () {
 

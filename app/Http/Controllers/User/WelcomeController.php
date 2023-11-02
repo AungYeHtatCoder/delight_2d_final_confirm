@@ -106,9 +106,15 @@ class WelcomeController extends Controller
         return view('frontend.winnerDigit');
     }
 
+    public function winnerPage(){
+        return view('frontend.winner_page');
+    }
+
     public function myDigit(){
         return view('frontend.myDigit');
     }
+
+
 
     public function myBank(){
         return view('frontend.myBank');
@@ -129,6 +135,14 @@ class WelcomeController extends Controller
 
     public function comment(){
         return view('frontend.comment');
+    }
+
+    public function user_dashboard(){
+        return view('frontend.dashboard');
+    }
+
+    public function winningRecord(){
+        return view('frontend.winningRecord');
     }
 
     /**

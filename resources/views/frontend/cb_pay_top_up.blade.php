@@ -7,9 +7,10 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css">
 @endsection
 @section('content')
-<h6 class="text-center mt-2 pb-2" style="color: #1aacac;">ငွေဖြည့်မည်</h6>
+<div style="padding-bottom: 100px;background-color: #fdd9d9; min-height: 100vh;">
+<h6 class="text-center mt-2 pb-2" style="color: #ab0000;">ငွေဖြည့်မည်</h6>
 
-<p style="color: #1aacac;"> ငွေဖြည့်သွင်းရန် Logo ပုံကို နိပ်ပါ</p>
+<p style="color: #ab0000;"> ငွေဖြည့်သွင်းရန် Logo ပုံကို နိပ်ပါ</p>
 <div class="top-up-card">
  {{-- <div class="banks blur-image">
   <img src="{{ asset('user_app/assets/img/bank/kpay.png') }}"  onclick="showForm()" class="w-100" alt="">
@@ -19,7 +20,7 @@
  </div> --}}
  <div class="banks blur-image">
   <img src="{{ asset('user_app/assets/img/bank/cbpay.png') }}" onclick="showForm()" class="w-100" alt="">
-  
+
  </div>
  {{-- <div class="banks blur-image">
   <img src="{{ asset('user_app/assets/img/bank/aya_logo.png') }}" onclick="showForm()" class="w-100" alt="">
@@ -27,7 +28,7 @@
 </div>
 
 <div class="text-center mt-3">
-<p style="color: #1aacac;">လက်ကျန်ငွေ: {{ Auth::user()->balance }} ကျပ်</p>
+<p style="color: #ab0000;">လက်ကျန်ငွေ: {{ Auth::user()->balance }} ကျပ်</p>
 </div>
 <hr class="my-custom-line">
 
@@ -36,7 +37,7 @@
   <form action="{{ route('user.StoreCBpayFillMoney') }}" method="POST">
     @csrf
   <div class="form-group">
-    <p style="color: #1aacac;">ငွေလက်ခံမည့်ဖုန်းနံပါတ်</p>
+    <p style="color: #ab0000;">ငွေလက်ခံမည့်ဖုန်းနံပါတ်</p>
     {{-- <input type="number" value="" class="form-control" name="" id="inputField"> --}}
     <input type="number" id="kpay_no" name="cbpay_no" class="form-control" value="{{ $user->cbpay_no }}">
         <div class="input-group-append">
@@ -44,19 +45,19 @@
         </div>
   </div>
   <div class="form-group">
-    <p style="color: #1aacac;">သင်၏ CBpay ဖုန်းနံပါတ်ထဲ့ပါ</p>
+    <p style="color: #ab0000;">သင်၏ CBpay ဖုန်းနံပါတ်ထဲ့ပါ</p>
     <input type="number" value="" class="form-control" name="user_ph_no" id="inputField">
   </div>
   {{-- <div class="form-group">
-    <p style="color: #1aacac;">ငွေဖြည့်ပမာဏ</p>
+    <p style="color: #ab0000;">ငွေဖြည့်ပမာဏ</p>
     <input type="number" value="" class="form-control" name="" id="inputField">
   </div> --}}
-  <p class="mt-4" style="color: #1aacac;font-size: 14px;">လုပ်ဆောင်မှုအမှတ်စဥ် (နောက်ဆုံးဂဏန်း ၆ လုံး)</p>
+  <p class="mt-4" style="color: #ab0000;font-size: 14px;">လုပ်ဆောင်မှုအမှတ်စဥ် (နောက်ဆုံးဂဏန်း ၆ လုံး)</p>
         <div class="form-group">
             <input type="number" class="form-control" placeholder="ဂဏန်းခြောက်လုံး ဖြည့်ပါ" name="last_six_digit" id="">
         </div>
   <div class="form-group">
-    <p style="color: #1aacac;">ငွေဖြည့်ပမာဏ</p>
+    <p style="color: #ab0000;">ငွေဖြည့်ပမာဏ</p>
     <input type="number" value="" class="form-control" name="amount" id="amountInput">
 </div>
 
@@ -93,6 +94,7 @@
 </div>
 
 @endsection
+@include('user_layouts.footer')
 
 @section('script')
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
