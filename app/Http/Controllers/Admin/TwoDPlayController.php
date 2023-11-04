@@ -31,7 +31,7 @@ class TwoDPlayController extends Controller
     {
         // get all two digits
         //$twoDigits = TwoDigit::all();
-        return view('frontend.twod');
+        return view('two_d.play_two_d_index');
     }
 
     public function MorningPlayTwoDigit()
