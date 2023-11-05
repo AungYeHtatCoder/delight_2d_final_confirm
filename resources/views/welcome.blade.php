@@ -57,11 +57,11 @@
       <div class="">
         <div class="item-box">
           <h4>
-            <a href="">3D PLAY</a>
+            <a href="{{ route('admin.GetThreeDigit') }}">3D PLAY</a>
           </h4>
           <img src="{{ asset('user_app/assets/img/pngegg.png') }}" class="frameBox" alt="">
         </div>
-        <a href="" style="text-decoration: none;">
+        <a href="{{ route('admin.GetThreeDigit') }}" style="text-decoration: none;">
           <p class="item-text font-weight-bold">3D</p>
         </a>
       </div>
