@@ -226,7 +226,7 @@ font-size: 14px;
         </div>
         <div class="col-3">
             <span>
-                <a href="{{ route('admin.QuickMorningPlayTwoDigit') }}">အမြန်ရွေး</a>
+                <a href="{{ route('admin.QuickMorningPlayTwoDigit') }}" style="text-decoration: none; color: white">အမြန်ရွေး</a>
             </span>
         </div>
         <div class="col-3">

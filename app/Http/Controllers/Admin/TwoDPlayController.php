@@ -89,6 +89,80 @@ class TwoDPlayController extends Controller
     return view('two_d.quick_morning_play', compact('twoDigits', 'remainingAmounts', 'lottery_matches'));
         
     }
+    public function QuickOddMorningPlayTwoDigit()
+    {
+        $twoDigits = TwoDigit::all();
+
+    // Calculate remaining amounts for each two-digit
+    $remainingAmounts = [];
+    foreach ($twoDigits as $digit) {
+        $totalBetAmountForTwoDigit = DB::table('lottery_two_digit_copy')
+            ->where('two_digit_id', $digit->id)
+            ->sum('sub_amount');
+
+        $remainingAmounts[$digit->id] = 5000 - $totalBetAmountForTwoDigit; // Assuming 5000 is the session limit
+    }
+    $lottery_matches = LotteryMatch::where('id', 1)->whereNotNull('is_active')->first();
+
+    return view('two_d.odd_morning_play', compact('twoDigits', 'remainingAmounts', 'lottery_matches'));
+        
+    }
+
+    public function QuickEvenMorningPlayTwoDigit()
+    {
+        $twoDigits = TwoDigit::all();
+
+    // Calculate remaining amounts for each two-digit
+    $remainingAmounts = [];
+    foreach ($twoDigits as $digit) {
+        $totalBetAmountForTwoDigit = DB::table('lottery_two_digit_copy')
+            ->where('two_digit_id', $digit->id)
+            ->sum('sub_amount');
+
+        $remainingAmounts[$digit->id] = 5000 - $totalBetAmountForTwoDigit; // Assuming 5000 is the session limit
+    }
+    $lottery_matches = LotteryMatch::where('id', 1)->whereNotNull('is_active')->first();
+
+    return view('two_d.even_morning_play', compact('twoDigits', 'remainingAmounts', 'lottery_matches'));
+        
+    }
+
+    public function QuickOddSameMorningPlayTwoDigit()
+    {
+        $twoDigits = TwoDigit::all();
+
+    // Calculate remaining amounts for each two-digit
+    $remainingAmounts = [];
+    foreach ($twoDigits as $digit) {
+        $totalBetAmountForTwoDigit = DB::table('lottery_two_digit_copy')
+            ->where('two_digit_id', $digit->id)
+            ->sum('sub_amount');
+
+        $remainingAmounts[$digit->id] = 5000 - $totalBetAmountForTwoDigit; // Assuming 5000 is the session limit
+    }
+    $lottery_matches = LotteryMatch::where('id', 1)->whereNotNull('is_active')->first();
+
+    return view('two_d.odd_same_morning_play', compact('twoDigits', 'remainingAmounts', 'lottery_matches'));
+        
+    }
+    public function QuickEvenSameMorningPlayTwoDigit()
+    {
+        $twoDigits = TwoDigit::all();
+
+    // Calculate remaining amounts for each two-digit
+    $remainingAmounts = [];
+    foreach ($twoDigits as $digit) {
+        $totalBetAmountForTwoDigit = DB::table('lottery_two_digit_copy')
+            ->where('two_digit_id', $digit->id)
+            ->sum('sub_amount');
+
+        $remainingAmounts[$digit->id] = 5000 - $totalBetAmountForTwoDigit; // Assuming 5000 is the session limit
+    }
+    $lottery_matches = LotteryMatch::where('id', 1)->whereNotNull('is_active')->first();
+
+    return view('two_d.even_same_morning_play', compact('twoDigits', 'remainingAmounts', 'lottery_matches'));
+        
+    }
     public function index()
     {
         // get all two digits

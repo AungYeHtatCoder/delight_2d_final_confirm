@@ -282,6 +282,14 @@ font-size: 14px;
           <button type="button" id="nine" class="btn btn-success">9</button>
          </div>
         </div>
+        <div class="card mt-2">
+            <div class="card-body">
+                <a href="{{ route('admin.QuickOddMorningPlayTwoDigit') }}" class="btn btn-info btn-sm">မမ</a>
+                <a href="{{ route('admin.QuickEvenMorningPlayTwoDigit') }}" class="btn btn-warning btn-sm">စုံစုံ</a>
+                 <a href="{{ route('admin.QuickOddSameMorningPlayTwoDigit') }}" class="btn btn-primary btn-sm">မမ အပူး</a>
+                <a href="{{ route('admin.QuickEvenSameMorningPlayTwoDigit') }}" class="btn btn-warning btn-sm">စုံစုံ အပူး</a>
+            </div>
+        </div>
          </div>
         </div>
 

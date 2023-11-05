@@ -221,7 +221,7 @@ font-size: 14px;
             <span>12:01 PM</span>
         </div>
         <div class="col-3">
-            <span>အမြန်ရွေး</span>
+             <a href="{{ route('admin.QuickMorningPlayTwoDigit') }}" style="text-decoration: none; color: white">အမြန်ရွေး</a>
         </div>
         <div class="col-3">
             <a href="{{ route('admin.GetTwoDigit')}}" style="text-decoration: none"><span style="color: #f8f9fa">Back</span></a>
