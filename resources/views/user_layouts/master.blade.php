@@ -68,9 +68,11 @@
                         <div class="d-flex justify-content-between">
                           <div></div>
                             <h5 class="mx-auto">
-                                <a href="{{ url('/') }}" class="text-decoration-none text-white">Delight 2D | 3D</a>
+                                <a href="{{ url('/') }}" class="text-decoration-none text-white">Diamond 2D | 3D</a>
                             </h5>
-                          <span class="material-icons" id="refresh">refresh</span>
+                          <span>
+                            <a class="material-icons" id="refresh" href="{{ url('/') }}" style="text-decoration: none; color:rgba(255, 255, 255, 0.7)">refresh</a>
+                          </span>
                         </div>
                       </div>
                     </div>

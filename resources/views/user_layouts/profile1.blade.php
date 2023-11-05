@@ -8,6 +8,7 @@
             @auth
                 <p class="mb-0">{{ Auth::user()->name }}</p>
                 <p>{{ Auth::user()->phone }}</p>
+                
             @endauth
             @guest
                 <a href="{{ route('login') }}" class="text-decoration-none text-white">
@@ -24,10 +25,19 @@
     <div class="col-12">
       <div class="card child-div px-3 py-2">
         <div class="d-flex">
-          <p class="text-danger me-2 pb-0 mb-0">လက်ကျန်ငွေ (ကျပ်)</p>
+          @auth
+          <p class="text-danger me-2 pb-0 mb-0">လက်ကျန်ငွေ 
+            @if(Auth::user()->balance > 0)
+            {{ Auth::user()->balance }}
+            (ကျပ်)</p>
           <i class="fas fa-eye d-block mt-1 text-danger" style="font-size: 18px;"></i>
+            @else
+        <p><span class="text-danger font-weight-bold d-block">0.00 (ကျပ်)</span>
+        <i class="fas fa-eye-slash d-block mt-1 text-danger" style="font-size: 18px;"></i>
+            </p>
+            @endif
+          @endauth
         </div>
-        <span class="text-danger font-weight-bold d-block">0.00</span>
       </div>
     </div>
 </div>

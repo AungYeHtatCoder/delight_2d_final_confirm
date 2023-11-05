@@ -225,9 +225,7 @@ font-size: 14px;
             <span>12:01 PM</span>
         </div>
         <div class="col-3">
-            <span>
-                <a href="{{ route('admin.QuickMorningPlayTwoDigit') }}">အမြန်ရွေး</a>
-            </span>
+            <span>အမြန်ရွေး</span>
         </div>
         <div class="col-3">
             <a href="{{ route('admin.GetTwoDigit')}}" style="text-decoration: none"><span style="color: #f8f9fa">Back</span></a>
@@ -238,7 +236,7 @@ font-size: 14px;
 
         <div class="scrollable-container overflow-scroll mt-6 digit-box">
             <div class="row">
-                @foreach ($twoDigits->chunk(4) as $chunk)
+                @foreach ($twoDigits->chunk(3) as $chunk)
                 <div class="col-4">
                     @foreach ($chunk as $digit)
                         @php
@@ -273,7 +271,9 @@ font-size: 14px;
         <form action="{{ route('admin.two-d-play.store') }}" method="post" class="p-4">
             @csrf
             <div class="form-header mb-4">
-                {{-- <h2 class="text-center">Place Your Bet</h2> --}}
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+               အမြန်ရွေး 
+            </button>
             </div>
             <div class="row">
                 <div class="col-md-12 mb-3">
@@ -302,6 +302,78 @@ font-size: 14px;
         </div>
     @endif
     </div>
+    {{-- choice --}}
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        
+      </div>
+       <div class="modal-body">
+        <div class="row">
+    @foreach ($twoDigits->chunk(3) as $chunk)
+    <div class="col-4">
+        @foreach ($chunk as $digit)
+            @php
+                $totalBetAmountForTwoDigit = DB::table('lottery_two_digit_copy')
+                    ->where('two_digit_id', $digit->id)
+                    ->sum('sub_amount');
+            @endphp
+
+            @if ($totalBetAmountForTwoDigit < 5000)
+                <div class="text-center digit digit-button" style="background-color: javascript:getRandomColor();"
+                    data-digit="{{ $digit->two_digit }}" onclick="QuickselectDigit('{{ $digit->two_digit }}', this)">
+                    {{ $digit->two_digit }}
+                    <small class="d-block" style="font-size: 10px">{{ $remainingAmounts[$digit->id] }}</small>
+                </div>
+            @else
+                <div class="col-2 text-center digit disabled" style="background-color: javascript:getRandomColor();"
+                    data-digit="{{ $digit->two_digit }}" onclick="showLimitFullAlert()">
+                    {{ $digit->two_digit }}
+                </div>
+            @endif
+        @endforeach
+    </div>
+    @endforeach
+</div>
+
+                    <button type="button" id="zero" class="btn btn-primary">0</button>
+                    <button type="button" id="one" class="btn btn-secondary">1</button>
+                    <button type="button" id="two" class="btn btn-success">2</button>
+                    <button type="button" id="three" class="btn btn-danger">3</button>
+                    <button type="button" id="four" class="btn btn-warning">4</button>
+                    <button type="button" id="five" class="btn btn-info">5</button>
+                    <button type="button" id="six" class="btn btn-primary">6</button>
+                    <button type="button" id="seven" class="btn btn-dark">7</button>
+                    <button type="button" id="eight" class="btn btn-warning">8</button>
+                    <button type="button" id="nine" class="btn btn-success">9</button>
+                </div>
+                <form action="{{ route('admin.Quickstore') }}" method="post" class="p-4">
+                    @csrf
+                    <input type="text" id="outputField_ch" name="selected_digits" class="form-control" placeholder="ရွေးချယ်ထားသောဂဏန်းများ">
+                    <div id="amountInputs_ch" class="col-md-12 mb-3"></div>
+
+                <div class="col-md-12 mb-3">
+                    <label for="totalAmount">totalAmount</label>
+                    <input type="text" id="totalAmount_ch" name="totalAmount" class="form-control" readonly>
+                </div>
+
+                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+
+                <div class="col-12 d-flex justify-content-center mt-3">
+                    <button type="submit" class="btn btn-delete mr-3">ဖျက်မည်</button>
+                    <button type="submit" class="btn btn-confirm">ထိုးမည်</button>
+                </div>
+                </form>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+    {{-- choice --}}
 </div>
 
 @endsection
@@ -385,6 +457,59 @@ font-size: 14px;
              }
          }
 
+
+         function QuickselectDigit(num, element) {
+             const selectedInput = document.getElementById('selected_digits');
+             const amountInputsDiv = document.getElementById('amountInputs');
+
+             let selectedDigits = selectedInput.value ? selectedInput.value.split(",") : [];
+
+             // Get the remaining amount for the selected digit
+             const remainingAmount = Number(element.querySelector('small').innerText.split(' ')[1]);
+
+             // Check if the user tries to bet more than the remaining amount
+             if (selectedDigits.includes(num)) {
+                 const betAmountInput = document.getElementById('amount_' + num);
+
+                 if (Number(betAmountInput.value) > remainingAmount) {
+                     Swal.fire({
+                         icon: 'error',
+                         title: 'Bet Limit Exceeded',
+                         text: `You can only bet up to ${remainingAmount} for the digit ${num}.`
+                     });
+                     return;
+                 }
+             }
+
+             // Check if the digit is already selected
+             if (selectedDigits.includes(num)) {
+                 // If it is, remove the digit, its style, and its input field
+                 selectedInput.value = selectedInput.value.replace(num, '').replace(',,', ',').replace(/^,|,$/g, '');
+                 element.classList.remove('selected');
+
+                 const inputToRemove = document.getElementById('amount_' + num);
+                 amountInputsDiv.removeChild(inputToRemove);
+             } else {
+                 // Otherwise, add the digit, its style, and its input field
+                 selectedInput.value = selectedInput.value ? selectedInput.value + "," + num : num;
+                 element.classList.add('selected');
+
+                 const amountInput = document.createElement('input');
+                 amountInput.setAttribute('type', 'number');
+                 amountInput.setAttribute('name', 'amounts[' + num + ']');
+                 amountInput.setAttribute('id', 'amount_' + num);
+                 amountInput.setAttribute('placeholder', 'Amount for ' + num);
+                 amountInput.setAttribute('min', '100');
+                 amountInput.setAttribute('max', '5000');
+                 amountInput.setAttribute('class', 'form-control mt-2');
+                 amountInput.onchange = function() {
+                     updateTotalAmount();
+                     checkBetAmount(this, num);
+                 };
+                 amountInputsDiv.appendChild(amountInput);
+             }
+         }
+
          
          function checkBetAmount(inputElement, num) {
              // Replace the problematic line with the following code
@@ -417,6 +542,8 @@ font-size: 14px;
                  inputElement.value = ""; // Reset the input value
              }
          }
+
+        
          // New function to calculate and display the total amount
          function updateTotalAmount() {
              let total = 0;
@@ -482,6 +609,176 @@ font-size: 14px;
          document.querySelectorAll('.digit.disabled').forEach(el => {
              el.style.backgroundColor = getRandomColor();
          });
+     </script>
+     {{-- choice --}}
+     <script>
+    //     document.getElementById('zero').addEventListener('click', function() {
+    // const digitsStartingWithZero = Array.from(document.querySelectorAll('.digit-button'))
+    //     .filter(button => button.getAttribute('data-digit').startsWith('0'))
+    //     .map(button => button.getAttribute('data-digit'));
+    // console.log(digitsStartingWithZero);
+
+    // // Join the array into a string, separated by commas, spaces, or any other separator you prefer
+    // const outputString = digitsStartingWithZero.join(', ');
+
+    // // Set the value of the input field
+    // document.getElementById('outputField_ch').value = outputString;
+//});
+
+// qiuck select
+ function QuickselectDigit(num, element) {
+             const selectedInput = document.getElementById('selected_digits');
+             const amountInputsDiv = document.getElementById('amountInputs_ch');
+             let selectedDigits = selectedInput.value ? selectedInput.value.split(",") : [];
+             const remainingAmount = Number(element.querySelector('small').innerText.split(' ')[1]);
+
+             if (selectedDigits.includes(num)) {
+                 const betAmountInput = document.getElementById('amount_' + num);
+
+                 if (Number(betAmountInput.value) > remainingAmount) {
+                     Swal.fire({
+                         icon: 'error',
+                         title: 'Bet Limit Exceeded',
+                         text: `You can only bet up to ${remainingAmount} for the digit ${num}.`
+                     });
+                     return;
+                 }
+             }
+             if (selectedDigits.includes(num)) {
+                 // If it is, remove the digit, its style, and its input field
+                 selectedInput.value = selectedInput.value.replace(num, '').replace(',,', ',').replace(/^,|,$/g, '');
+                 element.classList.remove('selected');
+
+                 const inputToRemove = document.getElementById('amount_' + num);
+                 amountInputsDiv.removeChild(inputToRemove);
+             } else {
+                 // Otherwise, add the digit, its style, and its input field
+                 selectedInput.value = selectedInput.value ? selectedInput.value + "," + num : num;
+                 element.classList.add('selected');
+                 const amountInput = document.createElement('input');
+                 amountInput.setAttribute('type', 'number');
+                 amountInput.setAttribute('name', 'amounts[' + num + ']');
+                 amountInput.setAttribute('id', 'amount_' + num);
+                 amountInput.setAttribute('placeholder', 'Amount for ' + num);
+                 amountInput.setAttribute('min', '100');
+                 amountInput.setAttribute('max', '5000');
+                 amountInput.setAttribute('class', 'form-control mt-2');
+                 amountInput.onchange = function() {
+                     QuickupdateTotalAmount();
+                     QuickcheckBetAmount(this, num);
+                 };
+                 amountInputsDiv.appendChild(amountInput);
+             }
+         }
+        //  check bet amount
+        function QuickcheckBetAmount(inputElement, num) {
+             const digits = document.querySelectorAll('.digit');
+             let digitElement = null;
+
+             for (let i = 0; i < digits.length; i++) {
+                 if (digits[i].textContent.includes(num)) {
+                     digitElement = digits[i];
+                     break;
+                 }
+             }
+             if (!digitElement) {
+                 console.error('Could not find the digit element for', num);
+                 return;
+             }
+             const remainingAmount = Number(digitElement.querySelector('small').innerText.split(' ')[1]);
+             if (Number(inputElement.value) > remainingAmount) {
+                 Swal.fire({
+                     icon: 'error',
+                     title: 'Bet Limit Exceeded',
+                     text: `You can only bet up to ${remainingAmount} for the digit ${num}.`
+                 });
+                 inputElement.value = ""; 
+             }
+         }
+        //  update total amount
+        // Function to update the amounts for each selected digit and the total
+function QuickupdateAmounts() {
+    let totalAmount = 0;
+    const amounts = {}; // To store each digit's amount
+
+    // Loop through each selected digit
+    const selectedDigits = document.getElementById('outputField_ch').value.split(', ');
+    selectedDigits.forEach(digit => {
+        // Get the input element for the digit amount
+        let amountInput_a = document.querySelector(`input[name^="amounts${digit}"]`);
+        if (!amountInput_a) {
+            // If the input does not exist, create it
+            amountInput_a = document.createElement('input');
+            amountInput_a.type = 'number';
+            amountInput_a.name = `amounts${digit}`;
+            amountInput_a.placeholder = `Amount for ${digit}`;
+            amountInput_a.classList.add('form-control', 'mb-2');
+            amountInput_a.onchange = handleAmountChange; // A function to handle changes in amount
+            document.getElementById('amountInputs_ch').appendChild(amountInput_a);
+        }
+
+        // Parse the amount as a number and add to the total
+        const amount = parseFloat(amountInput_a.value) || 0;
+        amounts[digit] = amount; // Store in the object
+        totalAmount += amount; // Add to the total
+    });
+
+    // Update the total amount display
+    document.getElementById('totalAmount_ch').value = totalAmount.toFixed(2);
+
+    // Log amounts for each digit - this is optional, just for checking
+    console.log(amounts);
+}
+
+// Function to handle changes in the amount inputs
+function handleAmountChange(event) {
+    QuickupdateAmounts(); // Update amounts whenever any amount input changes
+}
+
+// Modify the event listener for the '0' button to also call updateAmounts
+document.getElementById('zero').addEventListener('click', function() {
+    const digitsStartingWithZero = Array.from(document.querySelectorAll('.digit-button'))
+        .filter(button => button.getAttribute('data-digit').startsWith('0'))
+        .map(button => button.getAttribute('data-digit'));
+    console.log(digitsStartingWithZero);
+
+    // Join the array into a string, separated by commas, spaces, or any other separator you prefer
+    const outputString = digitsStartingWithZero.join(', ');
+
+    // Set the value of the input field
+    document.getElementById('outputField_ch').value = outputString;
+
+    QuickupdateAmounts(); // Call this function to create/update the amount inputs
+});
+
+// Call updateAmounts on page load or when needed to initialize
+QuickupdateAmounts();
+
+        // function QuickupdateTotalAmount() {
+        //      let total = 0;
+        //      const inputs = document.querySelectorAll('input[name^="amounts["]');
+        //      inputs.forEach(input => {
+        //          total += Number(input.value);
+        //      });
+        //      const userBalanceSpan = document.getElementById('userBalance');
+        //      let userBalance = Number(userBalanceSpan.getAttribute('data-balance'));
+        //      if (userBalance < total) {
+                 
+        //          Swal.fire({
+        //              icon: 'error',
+        //              title: 'Oops...',
+        //              text: 'Your balance is not enough to play two digit. - သင်၏လက်ကျန်ငွေ မလုံလောက်ပါ - ကျေးဇူးပြု၍ ငွေဖြည့်ပါ။',
+        //              footer: `<a href=
+        //  "{{ route('admin.profiles.index') }}" style="background-color: #007BFF; color: #FFFFFF; padding: 5px 10px; border-radius: 5px; text-decoration: none;">Fill Balance - ငွေဖြည့်သွင်းရန် နိုပ်ပါ </a>`
+        //          });
+        //          return; 
+        //      }            
+        //      userBalance -= total;
+        //      userBalanceSpan.textContent = userBalance;
+        //      userBalanceSpan.setAttribute('data-balance', userBalance);
+
+        //      document.getElementById('totalAmount_ch').value = total;
+        //  }
      </script>
 @endsection
 

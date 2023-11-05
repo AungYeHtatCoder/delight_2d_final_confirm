@@ -201,9 +201,6 @@ font-size: 14px;
         <div class="">
             <div class="d-flex justify-content-between">
                 <i class="fas fa-wallet font-green d-block me-2" style="font-size: 20px;"></i>
-                {{-- <img src="{{ asset('user_app/assets/img/balance/money.png') }}" alt="money" --}}
-                    {{-- style="width: 25px; height: 25px;"> --}}
-                {{-- <span class="font-green">လက်ကျန်ငွေ</span> --}}
                 <span class="font-green d-block" id="userBalance"
                     data-balance="{{ Auth::user()->balance }}">လက်ကျန်ငွေ - {{ Auth::user()->balance }}
                     MMK
@@ -214,7 +211,6 @@ font-size: 14px;
         <div class="">
             <div class="d-flex">
                 <i class="fa-regular fa-clock d-block font-green me-2" style="font-size: 20px;"></i>
-                {{-- <img src="{{ asset('user_app/assets/img/balance/time.png') }}" alt="" style="width: 25px; height: 25px;"> --}}
                     <span class="font-green">ပိတ်ရန်ကျန်ချိန်</span>
             </div>
             <span class="font-green font-13">11:53:00 AM</span>
