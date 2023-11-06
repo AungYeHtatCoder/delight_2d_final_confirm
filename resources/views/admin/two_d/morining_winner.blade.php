@@ -63,7 +63,7 @@
                                 <!-- Loop through each two digits for the lottery -->
                                 @foreach ($lottery->twoDigitsMorning as $twoDigit)
                                     <!-- Check if it's a winner -->
-                                    @if ($prize_no_morning && $twoDigit->two_digit === $prize_no_morning->prize_no)
+                                    @if ($prize_no_morning && $twoDigit->two_digit == $prize_no_morning->prize_no)
                                         <tr>
                                             <td>{{ $lottery->user->name }}</td>
                                             <td>{{ $twoDigit->two_digit }}</td>

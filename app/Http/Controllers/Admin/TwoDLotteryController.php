@@ -16,7 +16,7 @@ class TwoDLotteryController extends Controller
 
 public function index()
 {
-    $lotteries = Lottery::with('twoDigits')->get();
+    $lotteries = Lottery::with('twoDigits')->orderBy('id', 'desc')->get();
     $prize_no = TwodWiner::whereDate('created_at', Carbon::today())->orderBy('id', 'desc')->first();
     return view('admin.two_d.two_d_history', compact('lotteries', 'prize_no'));
 }

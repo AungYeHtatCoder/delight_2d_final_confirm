@@ -39,20 +39,20 @@
 
 @section('content')
 <div style="margin-bottom: 100px;">
-    <a href="{{ url('/playRecord') }}" class="card text-decoration-none text-dark shadow p-3 my-3">
+    <a href="{{ url('user/two-d-winners-history') }}" class="card text-decoration-none text-dark shadow p-3 my-3">
         <div class="d-flex justify-content-between">
             <div class="d-flex">
                 <div class="me-3">
                     <i class="fas fa-list-ul twod-list"></i>
                 </div>
-                <p class="pb-0 mb-0">ထီထိုးမှတ်တမ်း</p>
+                <p class="pb-0 mb-0">ကံထူးရှင်များ</p>
             </div>
             <div>
                 <i class="fas fa-play"></i>
             </div>
         </div>
     </a>
-    <a href="{{ url('/winningRecord') }}" class="card text-decoration-none text-dark shadow p-3 my-3">
+    <a href="{{ url('user/morning-session-prize-no-history') }}" class="card text-decoration-none text-dark shadow p-3 my-3">
         <div class="d-flex justify-content-between">
             <div class="d-flex">
                 <div class="me-3">

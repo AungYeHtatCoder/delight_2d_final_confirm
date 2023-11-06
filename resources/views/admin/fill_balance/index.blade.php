@@ -58,6 +58,7 @@
                     <th>Date</th>
                     <th>Status</th>
                     <th>Customer</th>
+                    <th>Amount</th>
                     <th>PaymentNo</th>
                     <th>RecieveNo</th>
                     <th>Show</th>
@@ -107,6 +108,11 @@
                       <div class="d-flex align-items-center">
                         {{-- <img src="{{ $balance->user->profile }}" class="avatar avatar-xs me-2" alt="user image"> --}}
                         <span>{{ $balance->user->name }}</span>
+                      </div>
+                    </td>
+                    <td class="text-xs font-weight-normal">
+                      <div class="d-flex align-items-center">
+                        <span>{{ $balance->amount }}</span>
                       </div>
                     </td>
                     <td class="text-xs font-weight-normal">

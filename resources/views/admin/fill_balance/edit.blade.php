@@ -271,6 +271,15 @@
                                                 value="{{ $balance->last_six_digit }}">
                                         </div>
                                     </div>
+
+                                    <div class="row mt-3">
+                                        <div class="input-group input-group-static">
+                                            <label>တောင်းခံထားသောငွေပမာဏ</label>
+                                            <input type="text" readonly class="form-control"
+                                                value="{{ $balance->amount }}">
+                                        </div>
+                                    </div>
+
                                     <div class="row mt-3">
                                         <div class="input-group input-group-static">
                                             <label>Client Account Balance</label>

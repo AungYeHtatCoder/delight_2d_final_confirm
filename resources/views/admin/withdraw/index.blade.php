@@ -80,12 +80,12 @@
                     </td>
 <td class="text-xs font-weight-normal">
     <div class="d-flex align-items-center">
-        @if($balance->status === 'accept')
+        @if($balance->status == 'accept')
             <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-2 btn-sm d-flex align-items-center justify-content-center">
                 <i class="material-icons text-sm" aria-hidden="true">done</i>
             </button>
             <span>Accept</span>
-        @elseif($balance->status === 'reject')
+        @elseif($balance->status == 'reject')
             <button class="btn btn-icon-only btn-rounded btn-outline-danger mb-0 me-2 btn-sm d-flex align-items-center justify-content-center">
                 <i class="material-icons text-sm" aria-hidden="true">close</i>
             </button>
@@ -101,9 +101,9 @@
             @csrf
             @method('PUT')
             <select id="choices-category-edit" name="status" onchange="this.form.submit()">
-                <option value="pending" {{ $balance->status === 'pending' ? 'selected' : '' }}>Pending</option>
-                <option value="accept" {{ $balance->status === 'accept' ? 'selected' : '' }}>Accept</option>
-                <option value="reject" {{ $balance->status === 'reject' ? 'selected' : '' }}>Reject</option>
+                <option value="pending" {{ $balance->status == 'pending' ? 'selected' : '' }}>Pending</option>
+                <option value="accept" {{ $balance->status == 'accept' ? 'selected' : '' }}>Accept</option>
+                <option value="reject" {{ $balance->status == 'reject' ? 'selected' : '' }}>Reject</option>
             </select>
         </form>
     </div>

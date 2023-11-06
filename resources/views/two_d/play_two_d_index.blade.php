@@ -32,7 +32,7 @@
                 </a>
               </div>
               <div>
-                <a href="{{ url('/winnerPage') }}">
+                <a href="{{ url('user/two-d-winners-history') }}">
                   <span class="material-icons">stars</span>
                   <p>ကံထူးရှင်များ</p>
                 </a>

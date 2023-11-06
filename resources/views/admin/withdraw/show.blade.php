@@ -90,7 +90,7 @@
                     <div class="card-body pt-0 p-3 text-center">
                       <h6 class="text-center mb-0">Bill Request Status</h6>
                       <div class="d-flex align-items-center">
-        @if($balance->status === 1)
+        @if($balance->status == 'accept')
             <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-2 btn-sm d-flex align-items-center justify-content-center">
                 <i class="material-icons text-sm" aria-hidden="true">done</i>
             </button>
@@ -172,6 +172,15 @@
                   </div>
                   
                 </li>
+
+                <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                  <div class="d-flex flex-column">
+                    <h6 class="text-dark mb-1 font-weight-bold text-sm">တောင်းခံသည့် ငွေပမာဏ - {{ $balance->amount }}</h6>
+                    {{-- <span class="text-xs">#RV-126749</span> --}}
+                  </div>
+                  
+                </li>
+                
                 <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                   <div class="d-flex flex-column">
                     <h6 class="text-dark mb-1 font-weight-bold text-sm"> Email : {{ $balance->user->email }}</h6>
@@ -181,7 +190,7 @@
                 </li>
                 <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                   <div class="d-flex flex-column">
-                    <h6 class="text-dark mb-1 font-weight-bold text-sm"> Client Phone : {{ $balance->user_ph_no }}</h6>
+                    <h6 class="text-dark mb-1 font-weight-bold text-sm"> တောင်းခံသူ၏ Kpay No  : {{ $balance->user_ph_no }}</h6>
                     
                   </div>
                   

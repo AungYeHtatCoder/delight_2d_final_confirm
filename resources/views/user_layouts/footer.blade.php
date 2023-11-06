@@ -27,7 +27,7 @@
                       </a>
                     </div>
                     <div class="text-center">
-                      <a href="{{ url('/user_dashboard') }}" class="text-decoration-none footer-nav">
+                      <a href="{{ url('/user/dashboard') }}" class="text-decoration-none footer-nav">
                         <i class="fas fa-user d-block footer-icon"></i>
                         <span class="d-block footer-text">ကျွန်ုပ်</span>
                       </a>
