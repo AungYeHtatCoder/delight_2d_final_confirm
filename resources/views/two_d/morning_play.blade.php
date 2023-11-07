@@ -239,7 +239,7 @@ font-size: 14px;
         <div class="scrollable-container overflow-scroll mt-6 digit-box">
             <div class="row">
                 @foreach ($twoDigits->chunk(4) as $chunk)
-                <div class="col-4">
+                <div class="col-3">
                     @foreach ($chunk as $digit)
                         @php
                             $totalBetAmountForTwoDigit = DB::table('lottery_two_digit_copy')

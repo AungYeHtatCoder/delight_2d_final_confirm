@@ -45,7 +45,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
  */
 Route::get('/', [App\Http\Controllers\User\WelcomeController::class, 'index'])->name('welcome');
 // Route::get('/twod', [App\Http\Controllers\User\WelcomeController::class, 'twod']);
-Route::get('/wallet', [App\Http\Controllers\User\WelcomeController::class, 'wallet']);
 Route::get('/topUp', [App\Http\Controllers\User\WelcomeController::class, 'topUp']);
 Route::get('/withDraw', [App\Http\Controllers\User\WelcomeController::class, 'withDraw']);
 Route::get('/promo', [App\Http\Controllers\User\WelcomeController::class, 'promo']);
@@ -191,5 +190,7 @@ Route::get('/two-d-top-up-wallet', [App\Http\Controllers\User\WalletController::
     Route::put('/change-new-password', [ChangePasswordController::class, 'ChangenewPassword'])->name('changeNewPassword');
     Route::get('/morning-session-prize-no-history', [App\Http\Controllers\User\TwoDPrizeNoHistoryController::class, 'index'])->name('morningSessionPrizeNoHistory');
     Route::get('/two-d-winners-history', [App\Http\Controllers\User\WinnerHistoryController::class, 'winnerHistory'])->name('winnerHistory');
+    Route::get('/wallet', [App\Http\Controllers\User\WelcomeController::class, 'wallet']);
+
 
 });
