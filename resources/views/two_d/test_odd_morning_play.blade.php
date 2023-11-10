@@ -195,9 +195,6 @@
         grid-template-columns: auto auto auto auto auto;
         /* grid-gap: 10px; */
     }
-    .column{
-        height: 100%;
-    }
 </style>
 @endsection
 
@@ -207,9 +204,6 @@
         <div class="">
             <div class="d-flex justify-content-between">
                 <i class="fas fa-wallet font-green d-block me-2" style="font-size: 20px;"></i>
-                {{-- <img src="{{ asset('user_app/assets/img/balance/money.png') }}" alt="money" --}}
-                    {{-- style="width: 25px; height: 25px;"> --}}
-                {{-- <span class="font-green">လက်ကျန်ငွေ</span> --}}
                 <span class="font-green d-block" id="userBalance"
                     data-balance="{{ Auth::user()->balance }}">လက်ကျန်ငွေ - {{ Auth::user()->balance }}
                     MMK
@@ -220,7 +214,6 @@
         <div class="">
             <div class="d-flex">
                 <i class="fa-regular fa-clock d-block font-green me-2" style="font-size: 20px;"></i>
-                {{-- <img src="{{ asset('user_app/assets/img/balance/time.png') }}" alt="" style="width: 25px; height: 25px;"> --}}
                     <span class="font-green">ပိတ်ရန်ကျန်ချိန်</span>
             </div>
             <span class="font-green font-13">11:53:00 AM</span>
@@ -231,9 +224,7 @@
             <span>12:01 PM</span>
         </div>
         <div class="col-3">
-            <span>
-                <a href="{{ route('admin.QuickMorningPlayTwoDigit') }}" style="text-decoration: none; color: white">အမြန်ရွေး</a>
-            </span>
+             <a href="{{ route('admin.QuickMorningPlayTwoDigit') }}" style="text-decoration: none; color: white">အမြန်ရွေး</a>
         </div>
         <div class="col-3">
             <a href="{{ route('admin.GetTwoDigit')}}" style="text-decoration: none"><span style="color: #f8f9fa">Back</span></a>
@@ -245,7 +236,7 @@
         <div class="scrollable-container mt-6 digit-box">
             <div class="main-row">
                 @foreach ($twoDigits->chunk(4) as $chunk)
-                <div class="column">
+                <div class="">
                     @foreach ($chunk as $digit)
                         @php
                             $totalBetAmountForTwoDigit = DB::table('lottery_two_digit_copy')
@@ -262,12 +253,11 @@
                                     style="font-size: 10px">{{ $remainingAmounts[$digit->id] }}</small>
                                     <div class="progress">
                                         @php
-                                        $totalAmount = 5000;
-                                        $betAmount = $totalBetAmountForTwoDigit; // the amount already bet
-                                        $remainAmount = $totalAmount - $betAmount; // the amount remaining that can be bet
-                                        $percentage = ($betAmount / $totalAmount) * 100;
-                                    @endphp
-
+                                            $totalAmount = 5000;
+                                            $remainAmount = $remainingAmounts[$digit->id];
+                                            $percentage = ($remainAmount/$totalAmount)*100;
+                                            // dd($percentage."%");
+                                        @endphp
                                         <div class="progress-bar" style="width: {{ $percentage }}%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                             </div>
@@ -285,53 +275,6 @@
         </div>
     </div>
     <div class="dream-form">
-        <div class="card">
-         <div class="card-header">
-             <h6 class="mb-0">အရောင်ရှင်းလင်းချက် <span><a href="{{ route('admin.QuickMorningPlayTwoDigit') }}" style="text-decoration: none; color: #0e0101" class="btn btn-outline-primary btn-sm">အမြန်ရွေး</a></span></h6>
-         </div>
-         <div class="card-body">
-          <div class="row">
-           <div class="col-3">
-            <button id="one_amount" class="btn btn-outline-primary">150MMK</button>
-           </div>
-           <div class="col-3">
-            <button id="two_amount" class="btn btn-outline-secondary">200MMK</button>
-          </div>
-          <div class="col-3">
-            <button id="three_amount" class="btn btn-outline-success">250MMK</button>
-         </div>
-         <div class="col-3">
-            <button id="four_amount" class="btn btn-outline-danger">300MMK</button>
-         </div>
-          </div>
-          <div class="row mt-3">
-            <div class="col-3">
-             <button id="six_amount" class="btn btn-outline-warning">350MMK</button>
-            </div>
-            <div class="col-3">
-             <button id="seven_amount" class="btn btn-outline-info">500MMK</button>
-           </div>
-           <div class="col-3">
-             <button id="eight_amount" class="btn btn-outline-dark">1000MMK</button>
-          </div>
-          <div class="col-3">
-             <button id="nine_amount" class="btn btn-outline-primary">1500MMK</button>
-          </div>
-           </div>
-           <div class="row mt-3">
-            <div class="col-3">
-             <button id="ten_amount" class="btn btn-outline-secondary">2000MMK</button>
-            </div>
-            <div class="col-3">
-             <button id="eleven_amount" class="btn btn-outline-success">2500MMK</button>
-           </div>
-           <div class="col-3">
-             <button id="twele_amount" class="btn btn-outline-danger">3000MMK</button>
-           </div>
-           <div class="col-3">
-             <button id="theen_amount" class="btn btn-outline-warning">5000MMK</button>
-           </div>
-        </div>
     @if ($lottery_matches->is_active == 1)
         <form action="{{ route('admin.two-d-play.store') }}" method="post" class="p-4">
             @csrf
@@ -448,7 +391,58 @@
              }
          }
 
+         //   function selectDigit(num, element) {
+         //     const selectedInput = document.getElementById('selected_digits');
+         //     const amountInputsDiv = document.getElementById('amountInputs');
+         //     let selectedDigits = selectedInput.value ? selectedInput.value.split(",") : [];
 
+         //     // Get the remaining amount for the selected digit
+         //     const remainingAmount = Number(element.querySelector('small').innerText.split(' ')[1]);
+
+         //     // Check if the user tries to bet more than the remaining amount
+         //     if (selectedDigits.includes(num)) {
+         //         const betAmountInput = document.getElementById('amount_' + num);
+         //         if (Number(betAmountInput.value) > remainingAmount) {
+         //             Swal.fire({
+         //                 icon: 'error',
+         //                 title: 'Bet Limit Exceeded',
+         //                 text: `You can only bet up to ${remainingAmount} for the digit ${num}.`
+         //             });
+         //             return;
+         //         }
+         //     }
+
+         //     // Check if the digit is already selected
+         //     if (selectedDigits.includes(num)) {
+         //       // If it is, remove the digit, its style, and its input field
+         //       selectedInput.value = selectedInput.value.replace(num, '').replace(',,', ',').replace(/^,|,$/g, '');
+         //       element.classList.remove('selected');
+         //       const inputToRemove = document.getElementById('amount_' + num);
+         //       amountInputsDiv.removeChild(inputToRemove);
+         //     } else {
+         //       // Otherwise, add the digit, its style, and its input field
+         //       selectedInput.value = selectedInput.value ? selectedInput.value + "," + num : num;
+         //       element.classList.add('selected');
+
+         //       const amountInput = document.createElement('input');
+         //       amountInput.setAttribute('type', 'number');
+         //       amountInput.setAttribute('name', 'amounts[' + num + ']');
+         //       amountInput.setAttribute('id', 'amount_' + num);
+         //       amountInput.setAttribute('placeholder', 'Amount for ' + num);
+         //       amountInput.setAttribute('min', '100');
+         //       amountInput.setAttribute('max', '5000');
+         //       amountInput.setAttribute('class', 'form-control mt-2');
+         //       amountInput.onchange = updateTotalAmount; // Add this line to call the total update function
+         //       amountInputsDiv.appendChild(amountInput);
+         //     }
+
+         //     //updateTotalAmount();
+         //     amountInput.onchange = function() {
+         //     updateTotalAmount();
+         //     checkBetAmount(this, num);  // Add this line
+         // };
+
+         //   }
          function checkBetAmount(inputElement, num) {
              // Replace the problematic line with the following code
              const digits = document.querySelectorAll('.digit');
@@ -480,69 +474,23 @@
                  inputElement.value = ""; // Reset the input value
              }
          }
-         function setAmountForAllDigits(amount) {
-    const inputs = document.querySelectorAll('input[name^="amounts["]');
-    inputs.forEach(input => {
-        input.value = amount;
-    });
-    updateTotalAmount(); // Update the total amount after setting the new amounts
-}
 
-// Attach event listeners to all amount buttons
-document.getElementById('one_amount').addEventListener('click', function() { setAmountForAllDigits(150); });
-document.getElementById('two_amount').addEventListener('click', function() { setAmountForAllDigits(200); });
-document.getElementById('three_amount').addEventListener('click', function() { setAmountForAllDigits(250); });
-document.getElementById('four_amount').addEventListener('click', function() { setAmountForAllDigits(300); });
-// document.getElementById('five_amount').addEventListener('click', function() { setAmountForAllDigits(350); });
-document.getElementById('six_amount').addEventListener('click', function() { setAmountForAllDigits(350); });
-document.getElementById('seven_amount').addEventListener('click', function() { setAmountForAllDigits(500); });
-document.getElementById('eight_amount').addEventListener('click', function() { setAmountForAllDigits(1000); });
-document.getElementById('nine_amount').addEventListener('click', function() { setAmountForAllDigits(1500); });
-document.getElementById('ten_amount').addEventListener('click', function() { setAmountForAllDigits(2000); });
-document.getElementById('eleven_amount').addEventListener('click', function() { setAmountForAllDigits(2500); });
-document.getElementById('twele_amount').addEventListener('click', function() { setAmountForAllDigits(3000); });
-document.getElementById('theen_amount').addEventListener('click', function() { setAmountForAllDigits(5000); });
+         //   function checkBetAmount(inputElement, num) {
+         //     // Get the remaining amount for the selected digit
+         //     const digitElement = document.querySelector(`.digit:contains('${num}')`);
+         //     const remainingAmount = Number(digitElement.querySelector('small').innerText.split(' ')[1]);
 
+         //     // Check if the entered bet amount exceeds the remaining amount
+         //     if (Number(inputElement.value) > remainingAmount) {
+         //         Swal.fire({
+         //             icon: 'error',
+         //             title: 'Bet Limit Exceeded',
+         //             text: `You can only bet up to ${remainingAmount} for the digit ${num}.`
+         //         });
+         //         inputElement.value = "";  // Reset the input value
+         //     }
+         // }
 
-// function updateTotalAmount() {
-//     let total = 0;
-//     const inputs = document.querySelectorAll('input[name^="amounts["]'); // Get all amount inputs
-//     inputs.forEach(input => {
-//         const value = Number(input.value);
-//         if (value < 100 || value > 5000) {
-//             // If the input value is less than 100 or greater than 5000, show an error and reset the input
-//             Swal.fire({
-//                 icon: 'error',
-//                 title: 'Invalid amount',
-//                 text: 'The amount for each two-digit number must be between 100 and 5000 MMK.'
-//             });
-//             input.value = ''; // Reset the invalid input
-//         } else {
-//             total += value; // Add valid input values to the total
-//         }
-//     });
-
-//     // Check against the user's balance
-//     const userBalanceSpan = document.getElementById('userBalance');
-//     let userBalance = Number(userBalanceSpan.getAttribute('data-balance'));
-
-//     if (userBalance < total) {
-//         // If the balance is insufficient, show an error
-//         Swal.fire({
-//             icon: 'error',
-//             title: 'Oops...',
-//             text: 'Your balance is not enough to play two digit. - သင်၏လက်ကျန်ငွေ မလုံလောက်ပါ - ကျေးဇူးပြု၍ ငွေဖြည့်ပါ။',
-//             footer: `<a href="{{ url('user/wallet') }}" style="background-color: #007BFF; color: #FFFFFF; padding: 5px 10px; border-radius: 5px; text-decoration: none;">Fill Balance - ငွေဖြည့်သွင်းရန် နိုပ်ပါ </a>`
-//         });
-//     } else {
-//         // If the balance is sufficient, update the display
-//         userBalanceSpan.textContent = `လက်ကျန်ငွေ - ${(userBalance - total).toFixed(2)} MMK`; // Format for display
-//         userBalanceSpan.setAttribute('data-balance', userBalance - total);
-
-//         // Update the total amount display
-//         document.getElementById('totalAmount').value = total.toFixed(2);
-//     }
-// }
 
          // New function to calculate and display the total amount
          function updateTotalAmount() {
@@ -564,7 +512,7 @@ document.getElementById('theen_amount').addEventListener('click', function() { s
                      title: 'Oops...',
                      text: 'Your balance is not enough to play two digit. - သင်၏လက်ကျန်ငွေ မလုံလောက်ပါ - ကျေးဇူးပြု၍ ငွေဖြည့်ပါ။',
                      footer: `<a href=
-         "{{ url('user/wallet') }}" style="background-color: #007BFF; color: #FFFFFF; padding: 5px 10px; border-radius: 5px; text-decoration: none;">Fill Balance - ငွေဖြည့်သွင်းရန် နိုပ်ပါ </a>`
+         "{{ route('admin.profiles.index') }}" style="background-color: #007BFF; color: #FFFFFF; padding: 5px 10px; border-radius: 5px; text-decoration: none;">Fill Balance - ငွေဖြည့်သွင်းရန် နိုပ်ပါ </a>`
                  });
                  return; // Exit the function to prevent further changes
              }
@@ -577,6 +525,15 @@ document.getElementById('theen_amount').addEventListener('click', function() { s
 
              document.getElementById('totalAmount').value = total;
          }
+
+         // function getRandomColor() {
+         //   const letters = '0123456789ABCDEF';
+         //   let color = '#';
+         //   for (let i = 0; i < 6; i++) {
+         //     color += letters[Math.floor(Math.random() * 16)];
+         //   }
+         //   return color;
+         // }
          // sweet alert
          document.querySelector('form').addEventListener('submit', function(event) {
              event.preventDefault(); // prevent the form from submitting immediately

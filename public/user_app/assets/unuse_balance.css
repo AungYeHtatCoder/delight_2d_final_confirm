@@ -34,8 +34,8 @@ img {
   }
 
 .digit-box .digit {
-    width: 100%;
-    /* padding: 10px 5px; */
+    width: 100px;
+    padding: 10px 5px;
     /* margin: 0 20px 10px 0; */
     color: #000;
     background: #a9a9a9a8;
@@ -43,9 +43,9 @@ img {
     border-radius: 5px;
     font-size: 13px;
 }
-/* .digit-box .digit:nth-child(5n) {
+.digit-box .digit:nth-child(5n) {
     margin: 0 0 10px 0;
-} */
+}
 .btn-delete {
     color: #e83a3a;
     margin-right: 30px;
@@ -60,5 +60,5 @@ img {
     height: 5px!important;
 }
 .progress-bar {
-    background-color: #95ff01 !important;
+    background-color: #1aacac!important;
 }

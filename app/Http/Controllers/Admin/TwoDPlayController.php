@@ -22,6 +22,7 @@ class TwoDPlayController extends Controller
     /**
      * Display a listing of the resource.
      */
+    
     private $sessionLimits = [
     'morning' => 5000, // Limit for morning session
     'evening' => 5000  // Limit for evening session

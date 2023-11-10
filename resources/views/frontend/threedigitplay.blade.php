@@ -40,20 +40,15 @@
 <!-- play section -->
 <div style="height: 79vh;">
     <div class="form-group mb-3">
-        <input type="number" class="form-control" style="height: 50px;" placeholder="ငွေပမာဏ အနည်းဆုံး (၁၀၀)ကျပ်" name="" id="">
+        <input type="number" class="form-control" style="height: 50px;" placeholder="At Least Amount (100 MMK)" name="" id="">
     </div>
     <div class="form-group mb-3">
-        <input type="number" class="form-control" style="height: 50px;" placeholder="စာရိုက်ပြီး ဂဏန်းရွေးမည်" name="" id="additionalInput">
+        <input type="number" class="form-control" style="height: 50px;" placeholder="Enter Your Play 3 Digit" name="" id="additionalInput" min="3" max="3">
     </div>
-    <h6 class="text-center my-4" style="color: red;">ဂဏန်းရွေးမည်</h6>
+    <h6 class="text-center my-4" style="color: red;">Your Chose Digit</h6>
     <div class="container">
-        <div class="d-flex justify-content-between">
-            <input type="number" class="form-control threed-digit" placeholder="ရှေ့"  min="0" max="9">
-            <input type="number" class="form-control threed-digit mx-2" placeholder="လယ်"  min="0" max="9">
-            <input type="number" class="form-control threed-digit" placeholder="နောက်"  min="0" max="9">
-        </div>
         <div class="text-center my-3">
-            <a type="button" onclick="chooseNumber()" class="btn threeplay-btn text-white w-100" style="background: #ab0000;">ရွေးမည်</a>
+            <a type="button" onclick="chooseNumber()" class="btn threeplay-btn text-white w-100" style="background: #ab0000;">Choose Digit</a>
         </div>
         <div class="container">
             <div id="output"></div>
@@ -61,10 +56,10 @@
     <div class="container mt-5">
         <div class="d-flex justify-content-around">
             <div class="">
-                <a type="button" onclick="removeNumber()" class="btn removeplay-btn btn-outline-danger">ဖျက်မည်</a>
+                <a type="button" onclick="removeNumber()" class="btn removeplay-btn btn-outline-danger">Delete</a>
             </div>
             <div class="">
-                <a href="{{ url('/admin/three-d-play-confirm') }}" class="btn" style="background: #ab0000; color:#fff">ထိုးမည်</a>
+                <a href="{{ url('/admin/three-d-play-confirm') }}" class="btn" style="background: #ab0000; color:#fff">Continue Play</a>
              </div>
         </div>
     </div>
@@ -75,27 +70,68 @@
 @section('script')
 <script>
     function chooseNumber() {
-      const inputs = document.querySelectorAll('.threed-digit');
-      const additionalInput = document.getElementById('additionalInput');
-      const output = document.getElementById('output');
-      const additionalValue = additionalInput.value;
-      const values = Array.from(inputs).map(input => input.value);
+  const inputs = document.querySelectorAll('.threed-digit');
+  const additionalInput = document.getElementById('additionalInput');
+  const output = document.getElementById('output');
+  
+  // Retrieve existing digits from localStorage and parse them
+  let existingDigits = JSON.parse(localStorage.getItem('chosenDigits')) || [];
+  
+  const additionalValue = additionalInput.value;
+  if (additionalValue) {
+    // Push the additional value to the array
+    existingDigits.push(additionalValue); 
+    const result = document.createElement('div');
+    result.classList.add('output');
+    result.textContent = additionalValue;
+    output.appendChild(result);
+  } else {
+    // If no additional input, get values from other inputs and merge
+    const newDigits = Array.from(inputs).map(input => input.value);
+    existingDigits = existingDigits.concat(newDigits);
+    const result = document.createElement('div');
+    result.classList.add('output');
+    result.textContent = newDigits.join('');
+    output.appendChild(result);
+  }
+  
+  // Store the merged array of digits in localStorage
+  localStorage.setItem('chosenDigits', JSON.stringify(existingDigits));
 
-          if (additionalValue) {
-              const result = document.createElement('div');
-              result.classList.add('output');
-              result.textContent = `${additionalValue}`;
-              output.appendChild(result);
-          } else {
-              const result = document.createElement('div');
-              result.classList.add('output');
-              result.textContent = `${values.join('')}`;
-              output.appendChild(result);
-          }
-          inputs.forEach(input => input.value = '');
-          additionalInput.value = '';
+  // Clear all inputs
+  inputs.forEach(input => input.value = '');
+  additionalInput.value = '';
+}
 
-    }
+// function chooseNumber() {
+//   const inputs = document.querySelectorAll('.threed-digit');
+//   const additionalInput = document.getElementById('additionalInput');
+//   const output = document.getElementById('output');
+//   let chosenDigits = []; // Array to hold chosen digits
+
+//   const additionalValue = additionalInput.value;
+//   if (additionalValue) {
+//     chosenDigits.push(additionalValue); // Push the additional value to the array
+//     const result = document.createElement('div');
+//     result.classList.add('output');
+//     result.textContent = additionalValue;
+//     output.appendChild(result);
+//   } else {
+//     // If no additional input, get values from other inputs
+//     chosenDigits = Array.from(inputs).map(input => input.value);
+//     const result = document.createElement('div');
+//     result.classList.add('output');
+//     result.textContent = chosenDigits.join('');
+//     output.appendChild(result);
+//   }
+  
+//   // Store the chosen digits in localStorage
+//   localStorage.setItem('chosenDigits', JSON.stringify(chosenDigits));
+
+//   // Clear all inputs
+//   inputs.forEach(input => input.value = '');
+//   additionalInput.value = '';
+// }
 
     function removeNumber() {
           const output = document.getElementById('output');
